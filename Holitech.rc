@@ -1,0 +1,395 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Korean (Korea) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP_MODE         BITMAP                  "res\\mode.bmp"
+IDB_BITMAP_P1           BITMAP                  "res\\p1.bmp"
+IDB_BITMAP_P2           BITMAP                  "res\\P2.bmp"
+IDB_BITMAP_P3           BITMAP                  "res\\p3.bmp"
+IDB_BITMAP_P4           BITMAP                  "res\\p4.bmp"
+IDB_BITMAP_P5           BITMAP                  "res\\p5.bmp"
+IDB_BITMAP_P6           BITMAP                  "res\\p6.bmp"
+IDB_BITMAP_MUTE         BITMAP                  "res\\mute.bmp"
+IDB_BITMAP_NEXT         BITMAP                  "res\\next.bmp"
+IDB_BITMAP_PLAY         BITMAP                  "res\\play.bmp"
+IDB_BITMAP_PRE          BITMAP                  "res\\pre.bmp"
+IDB_BITMAP_VOL_DN       BITMAP                  "res\\vol-.bmp"
+IDB_BITMAP_VOL_UP       BITMAP                  "res\\vol+.bmp"
+IDB_BITMAP_COOLSEAT     BITMAP                  "res\\coolseat.bmp"
+IDB_BITMAP_HEATSEAT     BITMAP                  "res\\heatseat.bmp"
+IDB_BITMAP_TEM_DN       BITMAP                  "res\\tem-.bmp"
+IDB_BITMAP_TEM_UP       BITMAP                  "res\\tem+.bmp"
+IDB_BITMAP_VEN_DN       BITMAP                  "res\\ven-.bmp"
+IDB_BITMAP_VEN_UP       BITMAP                  "res\\ven+.bmp"
+IDB_BITMAP_AC           BITMAP                  "res\\ac.bmp"
+IDB_BITMAP_AIR          BITMAP                  "res\\air.bmp"
+IDB_BITMAP_AUTO         BITMAP                  "res\\auto.bmp"
+IDB_BITMAP_FRONTHEAT    BITMAP                  "res\\frontheat.bmp"
+IDB_BITMAP_MAX_AC       BITMAP                  "res\\maxac.bmp"
+IDB_BITMAP_REARHEAT     BITMAP                  "res\\rearheat.bmp"
+IDB_BITMAP_Z_SPECIAL    BITMAP                  "res\\z_special.bmp"
+IDB_BITMAP_LAMP_COL_OFF BITMAP                  "res\\Lamp_Col_Off.bmp"
+IDB_BITMAP_LAMP_COL_ON  BITMAP                  "res\\Lamp_Col_On.bmp"
+IDB_BITMAP_LAMP_ROW_OFF BITMAP                  "res\\Lamp_Row_Off.bmp"
+IDB_BITMAP_LAMP_ROW_ON  BITMAP                  "res\\Lamp_Row_On.bmp"
+IDB_BITMAP_LAMP_SEAT_BLUE BITMAP                  "res\\Lamp_Seat_B.bmp"
+IDB_BITMAP_LAMP_SEAT_OFF BITMAP                  "res\\Lamp_Seat_Off.bmp"
+IDB_BITMAP_LAMP_SEAT_RED BITMAP                  "res\\Lamp_Seat_R.bmp"
+IDB_BITMAP_VEN_FAN_OFF  BITMAP                  "res\\Ventilating_F_Off.bmp"
+IDB_BITMAP_VEN_FAN_ON   BITMAP                  "res\\Ventilating_F_On.bmp"
+IDB_BITMAP_VEN_OFF      BITMAP                  "res\\Ventilating_Off.bmp"
+IDB_BITMAP_VEN_ON       BITMAP                  "res\\Ventilating_On.bmp"
+IDB_BITMAP_AC1          BITMAP                  "res\\ac_1.bmp"
+IDB_BITMAP_AIR1         BITMAP                  "res\\air_1.bmp"
+IDB_BITMAP_AUTO1        BITMAP                  "res\\auto_1.bmp"
+IDB_BITMAP_BODYFOOT     BITMAP                  "res\\bodyfoot.bmp"
+IDB_BITMAP_BODYFOOT1    BITMAP                  "res\\bodyfoot_1.bmp"
+IDB_BITMAP_COOLSEAT1    BITMAP                  "res\\coolseat_1.bmp"
+IDB_BITMAP_COOLSEAT2    BITMAP                  "res\\coolseat_2.bmp"
+IDB_BITMAP_COOLSEAT3    BITMAP                  "res\\coolseat_3.bmp"
+IDB_BITMAP_FOOT         BITMAP                  "res\\foot.bmp"
+IDB_BITMAP_FOOT1        BITMAP                  "res\\foot_1.bmp"
+IDB_BITMAP_FRONTHEAT1   BITMAP                  "res\\frontheat_1.bmp"
+IDB_BITMAP_HEAD         BITMAP                  "res\\Head.bmp"
+IDB_BITMAP_HEAD1        BITMAP                  "res\\Head_1.bmp"
+IDB_BITMAP_HEADFOOT     BITMAP                  "res\\headfoot.bmp"
+IDB_BITMAP_HEADFOOT1    BITMAP                  "res\\headfoot_1.bmp"
+IDB_BITMAP_HEATSEAT1    BITMAP                  "res\\heatseat_1.bmp"
+IDB_BITMAP_HEATSEAT2    BITMAP                  "res\\heatseat_2.bmp"
+IDB_BITMAP_HEATSEAT3    BITMAP                  "res\\heatseat_3.bmp"
+IDB_BITMAP_MAX_AC1      BITMAP                  "res\\maxac_1.bmp"
+IDB_BITMAP_REARHEAT1    BITMAP                  "res\\rearheat_1.bmp"
+#endif    // Korean (Korea) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP_BACKGROUND   BITMAP                  "res\\Background.bmp"
+IDB_BITMAP_RESTORE_UP   BITMAP                  "res\\restore_up.bmp"
+IDB_BITMAP_CLOSE_DOWN   BITMAP                  "res\\close_down.bmp"
+IDB_BITMAP_CLOSE_UP     BITMAP                  "res\\close_up.bmp"
+IDB_BITMAP_MINIMIZE_DOWN BITMAP                  "res\\minimize_down.bmp"
+IDB_BITMAP_MINIMIZE_UP  BITMAP                  "res\\minimize_up.bmp"
+IDB_BITMAP_RESTORE_DOWN BITMAP                  "res\\restore_down.bmp"
+IDB_BITMAP_DOT_LARGE    BITMAP                  "res\\dot.bmp"
+IDB_BITMAP_0_LARGE      BITMAP                  "res\\0.bmp"
+IDB_BITMAP_1_LARGE      BITMAP                  "res\\1.bmp"
+IDB_BITMAP_2_LARGE      BITMAP                  "res\\2.bmp"
+IDB_BITMAP_3_LARGE      BITMAP                  "res\\3.bmp"
+IDB_BITMAP_4_LARGE      BITMAP                  "res\\4.bmp"
+IDB_BITMAP_5_LARGE      BITMAP                  "res\\5.bmp"
+IDB_BITMAP_6_LARGE      BITMAP                  "res\\6.bmp"
+IDB_BITMAP_7_LARGE      BITMAP                  "res\\7.bmp"
+IDB_BITMAP_8_LARGE      BITMAP                  "res\\8.bmp"
+IDB_BITMAP_9_LARGE      BITMAP                  "res\\9.bmp"
+IDB_BITMAP_MHZ          BITMAP                  "res\\mhz.bmp"
+IDB_BITMAP_Z_LARGE      BITMAP                  "res\\z.bmp"
+IDB_BITMAP_B_LARGE      BITMAP                  "res\\b.bmp"
+IDB_BITMAP_C_LARGE      BITMAP                  "res\\c.bmp"
+IDB_BITMAP_D_LARGE      BITMAP                  "res\\d.bmp"
+IDB_BITMAP_E_LARGE      BITMAP                  "res\\e.bmp"
+IDB_BITMAP_F_LARGE      BITMAP                  "res\\f.bmp"
+IDB_BITMAP_G_LARGE      BITMAP                  "res\\g.bmp"
+IDB_BITMAP_H_LARGE      BITMAP                  "res\\h.bmp"
+IDB_BITMAP_I_LARGE      BITMAP                  "res\\i.bmp"
+IDB_BITMAP_J_LARGE      BITMAP                  "res\\j.bmp"
+IDB_BITMAP_K_LARGE      BITMAP                  "res\\k.bmp"
+IDB_BITMAP_L_LARGE      BITMAP                  "res\\l.bmp"
+IDB_BITMAP_M_LARGE      BITMAP                  "res\\m.bmp"
+IDB_BITMAP_N_LARGE      BITMAP                  "res\\n.bmp"
+IDB_BITMAP_O_LARGE      BITMAP                  "res\\o.bmp"
+IDB_BITMAP_P_LARGE      BITMAP                  "res\\p.bmp"
+IDB_BITMAP_Q_LARGE      BITMAP                  "res\\q.bmp"
+IDB_BITMAP_R_LARGE      BITMAP                  "res\\r.bmp"
+IDB_BITMAP_S_LARGE      BITMAP                  "res\\s.bmp"
+IDB_BITMAP_T_LARGE      BITMAP                  "res\\t.bmp"
+IDB_BITMAP_U_LARGE      BITMAP                  "res\\u.bmp"
+IDB_BITMAP_V_LARGE      BITMAP                  "res\\v.bmp"
+IDB_BITMAP_W_LARGE      BITMAP                  "res\\w.bmp"
+IDB_BITMAP_X_LARGE      BITMAP                  "res\\x.bmp"
+IDB_BITMAP_Y_LARGE      BITMAP                  "res\\y.bmp"
+IDB_BITMAP_A_LARGE      BITMAP                  "res\\a.bmp"
+IDB_BITMAP_Z_SMALL      BITMAP                  "res\\z_small.bmp"
+IDB_BITMAP_1_SMALL      BITMAP                  "res\\1_small.bmp"
+IDB_BITMAP_2_SMALL      BITMAP                  "res\\2_small.bmp"
+IDB_BITMAP_3_SMALL      BITMAP                  "res\\3_small.bmp"
+IDB_BITMAP_4_SMALL      BITMAP                  "res\\4_small.bmp"
+IDB_BITMAP_5_SMALL      BITMAP                  "res\\5_small.bmp"
+IDB_BITMAP_6_SMALL      BITMAP                  "res\\6_small.bmp"
+IDB_BITMAP_7_SMALL      BITMAP                  "res\\7_small.bmp"
+IDB_BITMAP_8_SMALL      BITMAP                  "res\\8_small.bmp"
+IDB_BITMAP_9_SMALL      BITMAP                  "res\\9_small.bmp"
+IDB_BITMAP_A_SMALL      BITMAP                  "res\\a_small.bmp"
+IDB_BITMAP_B_SMALL      BITMAP                  "res\\b_small.bmp"
+IDB_BITMAP_C_SMALL      BITMAP                  "res\\c_small.bmp"
+IDB_BITMAP_D_SMALL      BITMAP                  "res\\d_small.bmp"
+IDB_BITMAP_E_SMALL      BITMAP                  "res\\e_small.bmp"
+IDB_BITMAP_F_SMALL      BITMAP                  "res\\f_small.bmp"
+IDB_BITMAP_G_SMALL      BITMAP                  "res\\g_small.bmp"
+IDB_BITMAP_H_SMALL      BITMAP                  "res\\h_small.bmp"
+IDB_BITMAP_Y_SMALL      BITMAP                  "res\\y_small.bmp"
+IDB_BITMAP_I_SMALL      BITMAP                  "res\\i_small.bmp"
+IDB_BITMAP_J_SMALL      BITMAP                  "res\\j_small.bmp"
+IDB_BITMAP_K_SMALL      BITMAP                  "res\\k_small.bmp"
+IDB_BITMAP_L_SMALL      BITMAP                  "res\\l_small.bmp"
+IDB_BITMAP_M_SMALL      BITMAP                  "res\\m_small.bmp"
+IDB_BITMAP_N_SMALL      BITMAP                  "res\\n_small.bmp"
+IDB_BITMAP_O_SMALL      BITMAP                  "res\\o_small.bmp"
+IDB_BITMAP_P_SMALL      BITMAP                  "res\\p_small.bmp"
+IDB_BITMAP_Q_SMALL      BITMAP                  "res\\q_small.bmp"
+IDB_BITMAP_R_SMALL      BITMAP                  "res\\r_small.bmp"
+IDB_BITMAP_S_SMALL      BITMAP                  "res\\s_small.bmp"
+IDB_BITMAP_T_SMALL      BITMAP                  "res\\t_small.bmp"
+IDB_BITMAP_U_SMALL      BITMAP                  "res\\u_small.bmp"
+IDB_BITMAP_V_SMALL      BITMAP                  "res\\v_small.bmp"
+IDB_BITMAP_W_SMALL      BITMAP                  "res\\w_small.bmp"
+IDB_BITMAP_X_SMALL      BITMAP                  "res\\x_small.bmp"
+IDB_BITMAP_0_SMALL      BITMAP                  "res\\0_small.bmp"
+IDB_BITMAP_DOT_SMALL    BITMAP                  "res\\dot_small.bmp"
+IDB_BITMAP_DASH_SMALL   BITMAP                  "res\\dash_small.bmp"
+IDB_BITMAP_APOSTROPHE_SMALL BITMAP                  "res\\apostrophe_small.bmp"
+IDB_BITMAP_SPACE_SMALL  BITMAP                  "res\\space_small.bmp"
+IDB_BITMAP_SPACE_LARGE  BITMAP                  "res\\space.bmp"
+IDB_BITMAP_EXCLAMATION_SMALL BITMAP                  "res\\exclamation_small.bmp"
+IDB_BITMAP_AMPERSAND_SMALL BITMAP                  "res\\ampersand_small.bmp"
+IDB_BITMAP_COMMA_SMALL  BITMAP                  "res\\comma_small.bmp"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "E:\\MyDrive\\0. Work\\AVN GUI\\Source\\res\\holitech_icon.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MAIN_DIALOG DIALOGEX 0, 0, 1920, 1080
+STYLE DS_SETFONT | WS_POPUP | WS_VISIBLE | WS_CLIPCHILDREN
+EXSTYLE WS_EX_APPWINDOW
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+END
+
+IDD_DIALOG_ABOUT DIALOG 0, 0, 222, 113
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Holitech GUI DEMO"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,165,92,50,14
+    LTEXT           "00.1",IDC_STATIC,20,20,11,8
+    GROUPBOX        "Holitech Windows Software Version",IDC_STATIC,7,7,208,30
+    GROUPBOX        "Holitech Hardware Version",IDC_STATIC,7,41,208,42
+    EDITTEXT        IDC_EDIT_HARDWAREVERSION,18,58,183,14,ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_DIALOG_TOOLBAR DIALOG 0, 0, 896, 24
+STYLE DS_SETFONT | WS_POPUP | WS_CLIPCHILDREN
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,6,0,0
+ PRODUCTVERSION 1,6,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "Holitech KOREA Branch"
+            VALUE "FileDescription", "Holitech"
+            VALUE "FileVersion", "0.1"
+            VALUE "InternalName", "AVN DEMO"
+            VALUE "LegalCopyright", "Copyright (C) 2017"
+            VALUE "OriginalFilename", "Holitech.EXE"
+            VALUE "ProductName", "Holitech Application"
+            VALUE "ProductVersion", "0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_MAIN_DIALOG, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 215
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 106
+    END
+
+    IDD_DIALOG_TOOLBAR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 889
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 22
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_TRAYMENU MENU
+BEGIN
+    POPUP "TrayPopup"
+    BEGIN
+        MENUITEM "Show Radio",                  ID_SHOWRADIO
+        MENUITEM "",                            1
+        MENUITEM "Seek Up",                     ID_SEEKUP
+        MENUITEM "Seek Down",                   ID_SEEKDOWN
+        MENUITEM "",                            2
+        MENUITEM "Preset 1",                    ID_PRESET1
+        MENUITEM "Preset 2",                    ID_PRESET2
+        MENUITEM "Preset 3",                    ID_PRESET3
+        MENUITEM "Preset 4",                    ID_PRESET4
+        MENUITEM "Preset 5",                    ID_PRESET5
+        MENUITEM "Preset 6",                    ID_PRESET6
+        MENUITEM "Preset 7",                    ID_PRESET7
+        MENUITEM "Preset 8",                    ID_PRESET8
+        MENUITEM "Preset 9",                    ID_PRESET9
+        MENUITEM "Preset 10",                   ID_PRESET10
+        MENUITEM "Preset 11",                   ID_PRESET11
+        MENUITEM "Preset 12",                   ID_PRESET12
+        MENUITEM "",                            3
+        MENUITEM "Preferences...",              ID_PREFERENCES
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        ID_EXIT
+    END
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

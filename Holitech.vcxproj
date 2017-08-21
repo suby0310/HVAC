@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName>"$/Holitech", EAOAAAAA</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <Keyword>MFCProj</Keyword>
+    <ProjectName>Holitech</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Release\Holitech.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Release\USBRadio.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\Holitech.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>.\Release\Holitech.exe</OutputFile>
+      <AdditionalDependencies>msimg32.lib;advapi32.lib;winmm.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Debug\Holitech.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Debug\USBRadio.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\Holitech.bsc</OutputFile>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>.\Debug\Holitech.exe</OutputFile>
+      <AdditionalDependencies>msimg32.lib;advapi32.lib;winmm.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AboutDlg.cpp" />
+    <ClCompile Include="StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="ToolbarDlg.cpp" />
+    <ClCompile Include="Holitech.cpp" />
+    <ClCompile Include="HolitechDlg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Holitech.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AboutDlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="ToolbarDlg.h" />
+    <ClInclude Include="Holitech.h" />
+    <ClInclude Include="HolitechDlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\0.bmp" />
+    <CustomBuild Include="res\0_small.bmp" />
+    <CustomBuild Include="res\1.bmp" />
+    <CustomBuild Include="res\1_small.bmp" />
+    <CustomBuild Include="res\2.bmp" />
+    <CustomBuild Include="res\2_small.bmp" />
+    <CustomBuild Include="res\3.bmp" />
+    <CustomBuild Include="res\3_small.bmp" />
+    <CustomBuild Include="res\4.bmp" />
+    <CustomBuild Include="res\4_small.bmp" />
+    <CustomBuild Include="res\5.bmp" />
+    <CustomBuild Include="res\5_small.bmp" />
+    <CustomBuild Include="res\6.bmp" />
+    <CustomBuild Include="res\6_small.bmp" />
+    <CustomBuild Include="res\7.bmp" />
+    <CustomBuild Include="res\7_small.bmp" />
+    <CustomBuild Include="res\8.bmp" />
+    <CustomBuild Include="res\8_small.bmp" />
+    <CustomBuild Include="res\9.bmp" />
+    <CustomBuild Include="res\9_small.bmp" />
+    <CustomBuild Include="res\a.bmp" />
+    <CustomBuild Include="res\a_small.bmp" />
+    <CustomBuild Include="res\ampersand_small.bmp" />
+    <CustomBuild Include="res\apostrophe_small.bmp" />
+    <CustomBuild Include="res\b.bmp" />
+    <CustomBuild Include="res\b_small.bmp" />
+    <CustomBuild Include="res\c.bmp" />
+    <CustomBuild Include="res\c_small.bmp" />
+    <CustomBuild Include="res\close_down.bmp" />
+    <CustomBuild Include="res\close_up.bmp" />
+    <CustomBuild Include="res\comma_small.bmp" />
+    <CustomBuild Include="res\d.bmp" />
+    <CustomBuild Include="res\d_small.bmp" />
+    <CustomBuild Include="res\dash_small.bmp" />
+    <CustomBuild Include="res\dot.bmp" />
+    <CustomBuild Include="res\dot_small.bmp" />
+    <CustomBuild Include="res\e.bmp" />
+    <CustomBuild Include="res\e_small.bmp" />
+    <CustomBuild Include="res\exclamation_small.bmp" />
+    <CustomBuild Include="res\f.bmp" />
+    <CustomBuild Include="res\f_small.bmp" />
+    <CustomBuild Include="res\fmtunerlink_down.bmp" />
+    <CustomBuild Include="res\fmtunerlink_up.bmp" />
+    <CustomBuild Include="res\g.bmp" />
+    <CustomBuild Include="res\g_small.bmp" />
+    <CustomBuild Include="res\h.bmp" />
+    <CustomBuild Include="res\h_small.bmp" />
+    <CustomBuild Include="res\i.bmp" />
+    <CustomBuild Include="res\i_small.bmp" />
+    <CustomBuild Include="res\j.bmp" />
+    <CustomBuild Include="res\j_small.bmp" />
+    <CustomBuild Include="res\k.bmp" />
+    <CustomBuild Include="res\k_small.bmp" />
+    <CustomBuild Include="res\l.bmp" />
+    <CustomBuild Include="res\l_small.bmp" />
+    <CustomBuild Include="res\m.bmp" />
+    <CustomBuild Include="res\m_small.bmp" />
+    <CustomBuild Include="res\mhz.bmp" />
+    <CustomBuild Include="res\minimize_down.bmp" />
+    <CustomBuild Include="res\minimize_up.bmp" />
+    <CustomBuild Include="res\mono.bmp" />
+    <CustomBuild Include="res\mute_down.bmp" />
+    <CustomBuild Include="res\mute_up.bmp" />
+    <CustomBuild Include="res\n.bmp" />
+    <CustomBuild Include="res\n_small.bmp" />
+    <CustomBuild Include="res\o.bmp" />
+    <CustomBuild Include="res\o_small.bmp" />
+    <CustomBuild Include="res\p.bmp" />
+    <CustomBuild Include="res\p_small.bmp" />
+    <CustomBuild Include="res\preset10_down.bmp" />
+    <CustomBuild Include="res\preset10_up.bmp" />
+    <CustomBuild Include="res\preset11_down.bmp" />
+    <CustomBuild Include="res\preset11_up.bmp" />
+    <CustomBuild Include="res\preset12_down.bmp" />
+    <CustomBuild Include="res\preset12_up.bmp" />
+    <CustomBuild Include="res\preset1_down.bmp" />
+    <CustomBuild Include="res\preset1_up.bmp" />
+    <CustomBuild Include="res\preset2_down.bmp" />
+    <CustomBuild Include="res\preset2_up.bmp" />
+    <CustomBuild Include="res\preset3_down.bmp" />
+    <CustomBuild Include="res\preset3_up.bmp" />
+    <CustomBuild Include="res\preset4_down.bmp" />
+    <CustomBuild Include="res\preset4_up.bmp" />
+    <CustomBuild Include="res\preset5_down.bmp" />
+    <CustomBuild Include="res\preset5_up.bmp" />
+    <CustomBuild Include="res\preset6_down.bmp" />
+    <CustomBuild Include="res\preset6_up.bmp" />
+    <CustomBuild Include="res\preset7_down.bmp" />
+    <CustomBuild Include="res\preset7_up.bmp" />
+    <CustomBuild Include="res\preset8_down.bmp" />
+    <CustomBuild Include="res\preset8_up.bmp" />
+    <CustomBuild Include="res\preset9_down.bmp" />
+    <CustomBuild Include="res\preset9_up.bmp" />
+    <CustomBuild Include="res\presetscandown_down.bmp" />
+    <CustomBuild Include="res\presetscandown_up.bmp" />
+    <CustomBuild Include="res\presetscanup_down.bmp" />
+    <CustomBuild Include="res\presetscanup_up.bmp" />
+    <CustomBuild Include="res\q.bmp" />
+    <CustomBuild Include="res\q_small.bmp" />
+    <CustomBuild Include="res\r.bmp" />
+    <CustomBuild Include="res\r_small.bmp" />
+    <CustomBuild Include="res\restore_down.bmp" />
+    <CustomBuild Include="res\restore_up.bmp" />
+    <CustomBuild Include="res\rssi0.bmp" />
+    <CustomBuild Include="res\rssi1.bmp" />
+    <CustomBuild Include="res\rssi2.bmp" />
+    <CustomBuild Include="res\rssi3.bmp" />
+    <CustomBuild Include="res\rssi4.bmp" />
+    <CustomBuild Include="res\rssi5.bmp" />
+    <CustomBuild Include="res\s.bmp" />
+    <CustomBuild Include="res\s_small.bmp" />
+    <CustomBuild Include="res\scandown_down.bmp" />
+    <CustomBuild Include="res\scandown_up.bmp" />
+    <CustomBuild Include="res\scanup_down.bmp" />
+    <CustomBuild Include="res\scanup_up.bmp" />
+    <CustomBuild Include="res\settings_down.bmp" />
+    <CustomBuild Include="res\settings_up.bmp" />
+    <CustomBuild Include="res\silabslink_down.bmp" />
+    <CustomBuild Include="res\silabslink_up.bmp" />
+    <CustomBuild Include="res\space.bmp" />
+    <CustomBuild Include="res\space_small.bmp" />
+    <CustomBuild Include="res\stereo.bmp" />
+    <CustomBuild Include="res\stereomono_down.bmp" />
+    <CustomBuild Include="res\stereomono_up.bmp" />
+    <CustomBuild Include="res\t.bmp" />
+    <CustomBuild Include="res\t_small.bmp" />
+    <CustomBuild Include="res\tunedown_down.bmp" />
+    <CustomBuild Include="res\tunedown_up.bmp" />
+    <CustomBuild Include="res\tuneup_down.bmp" />
+    <CustomBuild Include="res\tuneup_up.bmp" />
+    <CustomBuild Include="res\u.bmp" />
+    <CustomBuild Include="res\u_small.bmp" />
+    <CustomBuild Include="res\usbmculink_down.bmp" />
+    <CustomBuild Include="res\usbmculink_up.bmp" />
+    <CustomBuild Include="res\USBRadio.ico" />
+    <CustomBuild Include="res\USBRadio.rc2">
+      <FileType>RC</FileType>
+    </CustomBuild>
+    <CustomBuild Include="res\USBRadioBackground_Ads.bmp" />
+    <CustomBuild Include="res\USBRadioToolbar.bmp" />
+    <CustomBuild Include="res\v.bmp" />
+    <CustomBuild Include="res\v_small.bmp" />
+    <CustomBuild Include="res\volumeslide.bmp" />
+    <CustomBuild Include="res\w.bmp" />
+    <CustomBuild Include="res\w_small.bmp" />
+    <CustomBuild Include="res\x.bmp" />
+    <CustomBuild Include="res\x_small.bmp" />
+    <CustomBuild Include="res\y.bmp" />
+    <CustomBuild Include="res\y_small.bmp" />
+    <CustomBuild Include="res\z.bmp" />
+    <CustomBuild Include="res\z_small.bmp" />
+    <CustomBuild Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\ac.bmp" />
+    <None Include="res\ac_1.bmp" />
+    <None Include="res\air.bmp" />
+    <None Include="res\air_1.bmp" />
+    <None Include="res\auto.bmp" />
+    <None Include="res\auto_1.bmp" />
+    <None Include="res\Background.bmp" />
+    <None Include="res\Backgroundx4.bmp" />
+    <None Include="res\bitmap1.bmp" />
+    <None Include="res\bitmap2.bmp" />
+    <None Include="res\bodyfood.bmp" />
+    <None Include="res\bodyfood_1.bmp" />
+    <None Include="res\bodyfoot.bmp" />
+    <None Include="res\bodyfoot_1.bmp" />
+    <None Include="res\coolseat.bmp" />
+    <None Include="res\coolseat_1.bmp" />
+    <None Include="res\coolseat_2.bmp" />
+    <None Include="res\coolseat_3.bmp" />
+    <None Include="res\foot.bmp" />
+    <None Include="res\foot_1.bmp" />
+    <None Include="res\frontheat.bmp" />
+    <None Include="res\frontheat_1.bmp" />
+    <None Include="res\HB\Background.bmp" />
+    <None Include="res\HB\holitech_icon.ico" />
+    <None Include="res\HB\H_Background.bmp" />
+    <None Include="res\Head.bmp" />
+    <None Include="res\headfoot.bmp" />
+    <None Include="res\headfoot_1.bmp" />
+    <None Include="res\Head_1.bmp" />
+    <None Include="res\heatseat.bmp" />
+    <None Include="res\heatseat_1.bmp" />
+    <None Include="res\heatseat_2.bmp" />
+    <None Include="res\heatseat_3.bmp" />
+    <None Include="res\Holitech BMP\holitech_icon.ico" />
+    <None Include="res\holitech bmp\icon1.ico" />
+    <None Include="res\holitech_icon.ico" />
+    <None Include="res\Lamp_Col_Off.bmp" />
+    <None Include="res\Lamp_Col_On.bmp" />
+    <None Include="res\Lamp_L_Off.bmp" />
+    <None Include="res\Lamp_L_On.bmp" />
+    <None Include="res\Lamp_Row_Off.bmp" />
+    <None Include="res\Lamp_Row_On.bmp" />
+    <None Include="res\Lamp_Seat_B.bmp" />
+    <None Include="res\Lamp_Seat_Off.bmp" />
+    <None Include="res\Lamp_Seat_R.bmp" />
+    <None Include="res\Lamp_S_B.bmp" />
+    <None Include="res\Lamp_S_Off.bmp" />
+    <None Include="res\Lamp_S_R.bmp" />
+    <None Include="res\maxac.bmp" />
+    <None Include="res\maxac_1.bmp" />
+    <None Include="res\mode.bmp" />
+    <None Include="res\mute.bmp" />
+    <None Include="res\next.bmp" />
+    <None Include="res\p1.bmp" />
+    <None Include="res\P2.bmp" />
+    <None Include="res\p3.bmp" />
+    <None Include="res\p4.bmp" />
+    <None Include="res\p5.bmp" />
+    <None Include="res\p6.bmp" />
+    <None Include="res\play.bmp" />
+    <None Include="res\pre.bmp" />
+    <None Include="res\rearheat.bmp" />
+    <None Include="res\rearheat_1.bmp" />
+    <None Include="res\tem+.bmp" />
+    <None Include="res\tem-.bmp" />
+    <None Include="res\ven+.bmp" />
+    <None Include="res\ven-.bmp" />
+    <None Include="res\Ventilating_F_Off.bmp" />
+    <None Include="res\Ventilating_F_On.bmp" />
+    <None Include="res\Ventilating_Off.bmp" />
+    <None Include="res\Ventilating_On.bmp" />
+    <None Include="res\vol+.bmp" />
+    <None Include="res\vol-.bmp" />
+    <None Include="res\z_special.bmp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
