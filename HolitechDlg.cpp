@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "Holitech.h"
 #include "HolitechDlg.h"
-#include "ToolbarDlg.h"
 #include <mmdeviceapi.h>
 #include <endpointvolume.h>
 
@@ -25,21 +24,30 @@ enum PlayFlag{
 
 int dwID;					//mci에서 사용
 
-CString path;				//파일의 경로를 저장
-CString name;				//파일명 저장
-
-int g_listidx=0;			//리스트에서 현재 선택된 리스트의 인덱스저장
 int g_playtime=0;			//재생 시간
 int g_tend=0;				//현재 재생되는 노래의 총 재생시간을 저장
 int g_stop=FOFFSTOP;		//스탑버튼이 눌렸는지의 유무
 int g_repect=FNOREPECT;		//반복모드
-int g_random=FSEQ;				//랜덤모드
+int g_random=FSEQ;			//랜덤모드
 int g_playbutt=FPLAY;		//재생버튼이 눌렸는지 여부
 
-
-MCI_OPEN_PARMS mciOpen;	// Load files
-MCI_PLAY_PARMS mciPlay;	// Play files
+MCI_OPEN_PARMS mciOpen;		// Load files
+MCI_PLAY_PARMS mciPlay;		// Play files
 MCI_GENERIC_PARMS mciGeneric;	// Status of files
+
+
+int dwID_hvac;					//mci에서 사용
+
+int g_playtime_hvac=0;			//재생 시간
+int g_tend_hvac=0;				//현재 재생되는 노래의 총 재생시간을 저장
+int g_stop_hvac=FOFFSTOP;		//스탑버튼이 눌렸는지의 유무
+int g_repect_hvac=FNOREPECT;	//반복모드
+int g_playbutt_hvac=FPLAY;		//재생버튼이 눌렸는지 여부
+
+MCI_OPEN_PARMS mciOpen_hvac;	// Load files
+MCI_PLAY_PARMS mciPlay_hvac;	// Play files
+MCI_GENERIC_PARMS mciGeneric_hvac;	// Status of files
+
 
 HRESULT hr;
 
@@ -60,6 +68,41 @@ CHolitechDlg::CHolitechDlg(CWnd* pParent /*=NULL*/)
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_pToolTip = NULL;
+
+	//Inistialize state variables
+	m_AlwaysOnTop = false;
+	m_VolumeToggle = false;
+	m_DownPoint = CPoint(-1, -1);
+	m_KeyDown = 0x00;
+	m_CurrentPreset.presetNum = 0;
+	m_CurrentPreset.onPreset = false;
+	m_Text = false;
+
+	m_Status = 0;
+
+	m_Frequency = 87.5;
+	m_TrackNo = 1;
+
+	m_AVNvolume = 0.1;
+	m_AVNmode = CD;
+	m_AVNmute = false;
+
+	m_Tem = m_TemCo = 26;
+	m_Ven = 0;
+	m_HSDrv = 0;
+	m_CSDrv = 0;
+	m_HSCo = 0;
+	m_CSCo = 0;
+	m_BF = false;
+	m_H = false;
+	m_F = false;
+	m_HF = false;
+	m_FH = false;
+	m_RH = false;
+	m_HVACauto = false;
+	m_HVACac = false;
+	m_HVACmaxac = false;
+	m_HVACair = false;
 }
 
 void CHolitechDlg::DoDataExchange(CDataExchange* pDX)
@@ -181,9 +224,9 @@ BOOL CHolitechDlg::OnInitDialog()
 	
 	//Load the bitmaps of character sets and display icons
 	LoadBitmaps();
-
-	SetWindowPos(this, 0, 0, m_bmpBackgroundImage.GetBitmapDimension().cx, m_bmpBackgroundImage.GetBitmapDimension().cy, SW_SHOWMAXIMIZED/*SWP_SHOWWINDOW*/);
-#if 1	// Support Sub-Monitor
+#if 1
+	SetWindowPos(this, 0, 0, m_bmpBackgroundImage.GetBitmapDimension().cx, m_bmpBackgroundImage.GetBitmapDimension().cy, SW_SHOWMAXIMIZED|SWP_SHOWWINDOW);
+#else	// Support Sub-Monitor
 	// Find monitor quantity
 	if(::GetSystemMetrics(SM_CMONITORS) < 2)
 	{
@@ -250,43 +293,9 @@ BOOL CHolitechDlg::OnInitDialog()
 
 	//Add to the tray
 	Shell_NotifyIcon(NIM_ADD, &m_TrayData);
-	
-	//Inistialize state variables
-	m_AlwaysOnTop = false;
-	m_VolumeToggle = false;
-	m_DownPoint = CPoint(-1, -1);
-	m_KeyDown = 0x00;
-	m_CurrentPreset.presetNum = 0;
-	m_CurrentPreset.onPreset = false;
-	m_Text = false;
-
-	BYTE m_Status = 0;
 
 	MediaClose();
-
-	m_Frequency = 87.5;
-	m_TrackNo = 1;
-
-	m_AVNvolume = 0.1;
-	m_AVNmode = RADIO;
-	m_AVNmute = false;
-
-	m_Tem = m_TemCo = 26;
-	m_Ven = 0;
-	m_HSDrv = 0;
-	m_CSDrv = 0;
-	m_HSCo = 0;
-	m_CSCo = 0;
-	m_BF = false;
-	m_H = false;
-	m_F = false;
-	m_HF = false;
-	m_FH = false;
-	m_RH = false;
-	m_HVACauto = false;
-	m_HVACac = false;
-	m_HVACmaxac = false;
-	m_HVACair = false;
+	MediaClose_HVAC();
 
 	//Start the poll to find a device
 //	SetTimer(TIMER_FIND_DEVICE, 1, NULL);
@@ -721,6 +730,11 @@ void CHolitechDlg::DrawBitmapOnDC(CDC* memDC, CClientDC* cDC, CBitmap* bmp, int 
 	//Select the bitmap, and draw it at point x and y with it's current size
 	memDC->SelectObject(*bmp);
 	cDC->BitBlt(x, y, bmp->GetBitmapDimension().cx, bmp->GetBitmapDimension().cy, memDC, 0, 0, SRCCOPY);
+/*
+	SelectObject(MemDC, bit);
+	DeleteObject(bit);
+	DeleteDC(MemDC);
+*/
 }
 
 void CHolitechDlg::DrawBitmapOnDC(CDC* memDC, CClientDC* cDC, CBitmap* bmp, int x, int y, UINT transparentColor)
@@ -1459,6 +1473,71 @@ void CHolitechDlg::MediaClose()
 {
 	g_playbutt=FPLAY;																//새로 재생
 	mciSendCommand(dwID,MCI_CLOSE,NULL,(DWORD)(LPVOID)&mciPlay);					//다른 노래 실행시 mci를 닫고 하기 위해서
+	KillTimer(1);
+}
+
+void CHolitechDlg::MediaPlay_HVAC()
+{
+	switch(g_playbutt_hvac){ 															
+	case FPLAY:
+		if(dwID_hvac&&g_stop_hvac==FOFFSTOP)															//정지 후 시작을 다시 누를 경우와 실행 된적이 없을때는 실행을 안시킴
+			MediaClose_HVAC();
+
+		KillTimer(1);
+
+		// Changing Button image
+		// ...
+		g_playbutt_hvac=FPAUSE;
+
+		mciOpen_hvac.lpstrElementName;
+
+//		if(m_cname.Right(3)=="wav")
+//			mciOpen.lpstrDeviceType = "waveaudio";
+//		if(m_cname.Right(3)=="wma" || m_cname.Right(3)=="mp3")
+			mciOpen_hvac.lpstrDeviceType = "mpegvideo";
+
+		if(g_stop_hvac==FOFFSTOP){																//정지 버튼이 눌리지 안았을때는 mci를 새로 open
+			mciSendCommand(NULL, MCI_OPEN, MCI_OPEN_TYPE|MCI_OPEN_ELEMENT,(DWORD)&mciOpen_hvac);
+			dwID_hvac = mciOpen_hvac.wDeviceID;
+		}
+
+		mciSendCommand(dwID_hvac, MCI_PLAY, MCI_NOTIFY,(DWORD)&mciPlay);
+		MCI_STATUS_PARMS mciStatusParms;
+		mciStatusParms.dwItem = MCI_FORMAT_HMS; 											//재생시간을 밀리 세컨드로 읽어옴
+		mciSendCommand(dwID_hvac, MCI_STATUS, MCI_STATUS_ITEM ,(DWORD)(LPVOID)&mciStatusParms);
+		g_tend_hvac = mciStatusParms.dwReturn/1000;
+		g_playtime_hvac=0;
+		SetTimer(1,1000,NULL);
+		g_stop_hvac=FOFFSTOP;																	//정지버튼 누른후 시작 버튼을 눌렀을때를 위해
+		break;
+
+	case FPAUSE:																			//재생중이면 일시정지
+		// Changing Button image
+		// ...		
+		g_playbutt_hvac=FRESUME;
+
+		KillTimer(1);
+		mciSendCommand(dwID_hvac,MCI_PAUSE,MCI_WAIT,(DWORD)&mciGeneric_hvac);
+		break;														
+	
+	case FRESUME:																			//일시 정지가 된 부분부터시작
+		// Changing Button image
+		// ...
+		g_playbutt_hvac=FPAUSE;
+
+		MCI_PLAY_PARMS mciPlay;
+		mciPlay.dwFrom = g_playtime_hvac*1000;
+		SetTimer(1,1000,NULL);
+
+		mciSendCommand(dwID_hvac, MCI_PLAY, MCI_FROM,(DWORD)(LPVOID)&mciPlay);
+		break;
+	}
+}
+
+void CHolitechDlg::MediaClose_HVAC()
+{
+	g_playbutt_hvac=FPLAY;																//새로 재생
+	mciSendCommand(dwID_hvac,MCI_CLOSE,NULL,(DWORD)(LPVOID)&mciPlay_hvac);					//다른 노래 실행시 mci를 닫고 하기 위해서
 	KillTimer(1);
 }
 
@@ -2222,7 +2301,9 @@ void CHolitechDlg::OnMaxAC()
 		GetDlgItem(IDC_BUTTON_MAX_AC1)->ShowWindow(FALSE);
 	}
 
-	
+	mciOpen_hvac.lpstrElementName = "C4_The Caesars-Jerk It Out.mp3";;
+
+	MediaPlay_HVAC();
 }
 
 void CHolitechDlg::OnAir()

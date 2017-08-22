@@ -137,14 +137,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AboutDlg.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="ToolbarDlg.cpp" />
     <ClCompile Include="Holitech.cpp" />
     <ClCompile Include="HolitechDlg.cpp" />
   </ItemGroup>
@@ -152,10 +150,8 @@
     <ResourceCompile Include="Holitech.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AboutDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="StdAfx.h" />
-    <ClInclude Include="ToolbarDlg.h" />
     <ClInclude Include="Holitech.h" />
     <ClInclude Include="HolitechDlg.h" />
   </ItemGroup>
@@ -294,12 +290,6 @@
     <CustomBuild Include="res\u_small.bmp" />
     <CustomBuild Include="res\usbmculink_down.bmp" />
     <CustomBuild Include="res\usbmculink_up.bmp" />
-    <CustomBuild Include="res\USBRadio.ico" />
-    <CustomBuild Include="res\USBRadio.rc2">
-      <FileType>RC</FileType>
-    </CustomBuild>
-    <CustomBuild Include="res\USBRadioBackground_Ads.bmp" />
-    <CustomBuild Include="res\USBRadioToolbar.bmp" />
     <CustomBuild Include="res\v.bmp" />
     <CustomBuild Include="res\v_small.bmp" />
     <CustomBuild Include="res\volumeslide.bmp" />

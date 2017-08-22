@@ -86,8 +86,6 @@
 #define IDB_BITMAP_W_SMALL              271
 #define IDB_BITMAP_X_SMALL              272
 #define IDB_BITMAP_0_SMALL              273
-#define IDD_DIALOG_ABOUT                276
-#define IDD_DIALOG_TOOLBAR              278
 #define IDB_BITMAP_DOT_SMALL            288
 #define IDB_BITMAP_DASH_SMALL           289
 #define IDB_BITMAP_APOSTROPHE_SMALL     290
@@ -171,48 +169,47 @@
 #define IDC_BUTTON_CLOSE                1015
 #define IDC_BUTTON_TEM_DN               1016
 #define IDC_BUTTON_TEM_UP               1017
-#define IDC_BUTTON_HEATSEAT             1100	//1018
-#define IDC_BUTTON_HEATSEAT1            1101
-#define IDC_BUTTON_HEATSEAT2            1102
-#define IDC_BUTTON_HEATSEAT3            1103
-#define IDC_BUTTON_COOLSEAT             1104	//1019
-#define IDC_BUTTON_COOLSEAT1            1105
-#define IDC_BUTTON_COOLSEAT2            1106
-#define IDC_BUTTON_COOLSEAT3            1107
-#define IDC_BUTTON_BODYFOOT             1116	//1020
-#define IDC_BUTTON_BODYFOOT1            1117
-#define IDC_BUTTON_HEAD					1118	//1021
-#define IDC_BUTTON_HEAD1				1119
-#define IDC_BUTTON_FOOT					1120	//1022
-#define IDC_BUTTON_FOOT1				1121
-#define IDC_BUTTON_HEADFOOT             1122	//1023
-#define IDC_BUTTON_HEADFOOT1            1123
 #define IDC_BUTTON_VEN_DN               1024
 #define IDC_BUTTON_VEN_UP               1025
 #define IDC_BUTTON_TEM_DN_CO            1026
 #define IDC_BUTTON_TEM_UP_CO            1027
-#define IDC_BUTTON_HEATSEAT_CO          1108	//1028
+#define IDC_BUTTON_PRESETS              1042
+#define IDC_BUTTON_HEATSEAT             1100
+#define IDC_BUTTON_HEATSEAT1            1101
+#define IDC_BUTTON_HEATSEAT2            1102
+#define IDC_BUTTON_HEATSEAT3            1103
+#define IDC_BUTTON_COOLSEAT             1104
+#define IDC_BUTTON_COOLSEAT1            1105
+#define IDC_BUTTON_COOLSEAT2            1106
+#define IDC_BUTTON_COOLSEAT3            1107
+#define IDC_BUTTON_HEATSEAT_CO          1108
 #define IDC_BUTTON_HEATSEAT_CO1         1109
 #define IDC_BUTTON_HEATSEAT_CO2         1110
 #define IDC_BUTTON_HEATSEAT_CO3         1111
-#define IDC_BUTTON_COOLSEAT_CO          1112	//1029
+#define IDC_BUTTON_COOLSEAT_CO          1112
 #define IDC_BUTTON_COOLSEAT_CO1         1113
 #define IDC_BUTTON_COOLSEAT_CO2         1114
 #define IDC_BUTTON_COOLSEAT_CO3         1115
-#define IDC_BUTTON_FRONTHEAT            1124	//1030
+#define IDC_BUTTON_BODYFOOT             1116
+#define IDC_BUTTON_BODYFOOT1            1117
+#define IDC_BUTTON_HEAD                 1118
+#define IDC_BUTTON_HEAD1                1119
+#define IDC_BUTTON_FOOT                 1120
+#define IDC_BUTTON_FOOT1                1121
+#define IDC_BUTTON_HEADFOOT             1122
+#define IDC_BUTTON_HEADFOOT1            1123
+#define IDC_BUTTON_FRONTHEAT            1124
 #define IDC_BUTTON_FRONTHEAT1           1125
-#define IDC_BUTTON_REARHEAT             1126	//1031
+#define IDC_BUTTON_REARHEAT             1126
 #define IDC_BUTTON_REARHEAT1            1127
-#define IDC_BUTTON_AUTO                 1128	//1032
+#define IDC_BUTTON_AUTO                 1128
 #define IDC_BUTTON_AUTO1                1129
-#define IDC_BUTTON_AC                   1130	//1033
+#define IDC_BUTTON_AC                   1130
 #define IDC_BUTTON_AC1                  1131
-#define IDC_BUTTON_MAX_AC               1132	//1034
+#define IDC_BUTTON_MAX_AC               1132
 #define IDC_BUTTON_MAX_AC1              1133
-#define IDC_BUTTON_AIR                  1134	//1035
+#define IDC_BUTTON_AIR                  1134
 #define IDC_BUTTON_AIR1                 1135
-#define IDC_BUTTON_PRESETS              1042
-#define IDC_EDIT_HARDWAREVERSION		1050
 #define ID_EXIT                         32771
 #define ID_PRESET1                      32772
 #define ID_PRESET2                      32773

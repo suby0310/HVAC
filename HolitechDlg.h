@@ -359,6 +359,10 @@ protected:
 	void MediaStop();
 	void MediaClose();
 
+	//Hnadling MCI HVAC
+	void MediaPlay_HVAC();
+	void MediaClose_HVAC();
+
 	// Generated message map functions
 	//{{AFX_MSG(CHolitechDlg)
 	virtual BOOL OnInitDialog();
