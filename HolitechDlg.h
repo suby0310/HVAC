@@ -173,45 +173,23 @@ protected:
 	CBitmapButton m_TemDn;
 	CBitmapButton m_TemUp;
 	CBitmapButton m_HeatSeat;
-	CBitmapButton m_HeatSeat1;
-	CBitmapButton m_HeatSeat2;
-	CBitmapButton m_HeatSeat3;
 	CBitmapButton m_CoolSeat;
-	CBitmapButton m_CoolSeat1;
-	CBitmapButton m_CoolSeat2;
-	CBitmapButton m_CoolSeat3;
 	CBitmapButton m_VenDn;
 	CBitmapButton m_VenUo;
 	CBitmapButton m_TemDn_Co;
 	CBitmapButton m_TemUp_Co;
 	CBitmapButton m_HeatSeat_Co;
-	CBitmapButton m_HeatSeat_Co1;
-	CBitmapButton m_HeatSeat_Co2;
-	CBitmapButton m_HeatSeat_Co3;
 	CBitmapButton m_CoolSeat_Co;
-	CBitmapButton m_CoolSeat_Co1;
-	CBitmapButton m_CoolSeat_Co2;
-	CBitmapButton m_CoolSeat_Co3;	
 	CBitmapButton m_FrontHeat;
-	CBitmapButton m_FrontHeat1;
 	CBitmapButton m_RearHeat;
-	CBitmapButton m_RearHeat1;
 	CBitmapButton m_Auto;
-	CBitmapButton m_Auto1;
 	CBitmapButton m_AC;
-	CBitmapButton m_AC1;
 	CBitmapButton m_MaxAC;
-	CBitmapButton m_MaxAC1;
 	CBitmapButton m_Air;
-	CBitmapButton m_Air1;
 	CBitmapButton m_BodyFoot;
-	CBitmapButton m_BodyFoot1;
 	CBitmapButton m_Head;
-	CBitmapButton m_Head1;
 	CBitmapButton m_Foot;
-	CBitmapButton m_Foot1;
 	CBitmapButton m_HeadFoot;
-	CBitmapButton m_HeadFoot1;
 
 	//Bitmaps for the Window and Letters
 	CBitmap	m_bmpBackgroundImage;
@@ -405,7 +383,6 @@ protected:
 	afx_msg void OnAC();
 	afx_msg void OnMaxAC();
 	afx_msg void OnAir();
-	
 	afx_msg void OnTimer(UINT nIDEvent);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
@@ -413,8 +390,6 @@ protected:
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 };
 
 //{{AFX_INSERT_LOCATION}}

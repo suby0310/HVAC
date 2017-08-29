@@ -39,10 +39,10 @@ MCI_GENERIC_PARMS mciGeneric;	// Status of files
 int dwID_hvac;					//mci에서 사용
 
 int g_playtime_hvac=0;			//재생 시간
-int g_tend_hvac=0;				//현재 재생되는 노래의 총 재생시간을 저장
+int g_tend_hvac=0xFFFF;			//현재 재생되는 노래의 총 재생시간을 저장
 int g_stop_hvac=FOFFSTOP;		//스탑버튼이 눌렸는지의 유무
-int g_repect_hvac=FNOREPECT;	//반복모드
-int g_playbutt_hvac=FPLAY;		//재생버튼이 눌렸는지 여부
+int g_repect_hvac=FONEREPECT;	//반복모드
+int g_playbutt_hvac=0;			//재생버튼이 눌렸는지 여부
 
 MCI_OPEN_PARMS mciOpen_hvac;	// Load files
 MCI_PLAY_PARMS mciPlay_hvac;	// Play files
@@ -133,50 +133,26 @@ BEGIN_MESSAGE_MAP(CHolitechDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_MUTE	, OnMute)
 	ON_BN_CLICKED(IDC_BUTTON_VOL_DN	, OnVolDn)
 	ON_BN_CLICKED(IDC_BUTTON_VOL_UP	, OnVolUp)
-
 	ON_BN_CLICKED(IDC_BUTTON_TEM_DN		, OnTemDn)
 	ON_BN_CLICKED(IDC_BUTTON_TEM_UP		, OnTemUp)
 	ON_BN_CLICKED(IDC_BUTTON_HEATSEAT	, OnHeatSeat)
-	ON_BN_CLICKED(IDC_BUTTON_HEATSEAT1	, OnHeatSeat)
-	ON_BN_CLICKED(IDC_BUTTON_HEATSEAT2	, OnHeatSeat)
-	ON_BN_CLICKED(IDC_BUTTON_HEATSEAT3	, OnHeatSeat)
 	ON_BN_CLICKED(IDC_BUTTON_COOLSEAT	, OnCoolSeat)
-	ON_BN_CLICKED(IDC_BUTTON_COOLSEAT1	, OnCoolSeat)
-	ON_BN_CLICKED(IDC_BUTTON_COOLSEAT2	, OnCoolSeat)
-	ON_BN_CLICKED(IDC_BUTTON_COOLSEAT3	, OnCoolSeat)
 	ON_BN_CLICKED(IDC_BUTTON_BODYFOOT	, OnBodyFoot)
-	ON_BN_CLICKED(IDC_BUTTON_BODYFOOT1	, OnBodyFoot)
 	ON_BN_CLICKED(IDC_BUTTON_HEAD		, OnHead)
-	ON_BN_CLICKED(IDC_BUTTON_HEAD1		, OnHead)
 	ON_BN_CLICKED(IDC_BUTTON_FOOT		, OnFoot)
-	ON_BN_CLICKED(IDC_BUTTON_FOOT1		, OnFoot)
 	ON_BN_CLICKED(IDC_BUTTON_HEADFOOT	, OnHeadFoot)
-	ON_BN_CLICKED(IDC_BUTTON_HEADFOOT1	, OnHeadFoot)
 	ON_BN_CLICKED(IDC_BUTTON_VEN_DN		, OnVenDn)
 	ON_BN_CLICKED(IDC_BUTTON_VEN_UP		, OnVenUp)
 	ON_BN_CLICKED(IDC_BUTTON_TEM_DN_CO	, OnTemDnCo)
 	ON_BN_CLICKED(IDC_BUTTON_TEM_UP_CO	, OnTemUpCo)
 	ON_BN_CLICKED(IDC_BUTTON_HEATSEAT_CO, OnHeatSeatCo)
-	ON_BN_CLICKED(IDC_BUTTON_HEATSEAT_CO1, OnHeatSeatCo)
-	ON_BN_CLICKED(IDC_BUTTON_HEATSEAT_CO2, OnHeatSeatCo)
-	ON_BN_CLICKED(IDC_BUTTON_HEATSEAT_CO3, OnHeatSeatCo)
 	ON_BN_CLICKED(IDC_BUTTON_COOLSEAT_CO, OnCoolSeatCo)
-	ON_BN_CLICKED(IDC_BUTTON_COOLSEAT_CO1, OnCoolSeatCo)
-	ON_BN_CLICKED(IDC_BUTTON_COOLSEAT_CO2, OnCoolSeatCo)
-	ON_BN_CLICKED(IDC_BUTTON_COOLSEAT_CO3, OnCoolSeatCo)
 	ON_BN_CLICKED(IDC_BUTTON_FRONTHEAT	, OnFrontHeat)
-	ON_BN_CLICKED(IDC_BUTTON_FRONTHEAT1	, OnFrontHeat)
 	ON_BN_CLICKED(IDC_BUTTON_REARHEAT	, OnRearHeat)
-	ON_BN_CLICKED(IDC_BUTTON_REARHEAT1	, OnRearHeat)
 	ON_BN_CLICKED(IDC_BUTTON_AUTO		, OnAuto)
-	ON_BN_CLICKED(IDC_BUTTON_AUTO1		, OnAuto)
 	ON_BN_CLICKED(IDC_BUTTON_AC			, OnAC)
-	ON_BN_CLICKED(IDC_BUTTON_AC1		, OnAC)
 	ON_BN_CLICKED(IDC_BUTTON_MAX_AC		, OnMaxAC)
-	ON_BN_CLICKED(IDC_BUTTON_MAX_AC1	, OnMaxAC)
 	ON_BN_CLICKED(IDC_BUTTON_AIR		, OnAir)
-	ON_BN_CLICKED(IDC_BUTTON_AIR1		, OnAir)
-
 	ON_WM_TIMER()
 	ON_WM_LBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
@@ -195,6 +171,8 @@ BEGIN_MESSAGE_MAP(CHolitechDlg, CDialog)
 	ON_WM_WINDOWPOSCHANGING()
 	ON_WM_ERASEBKGND()
 
+	ON_WM_DESTROY()
+	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -224,58 +202,9 @@ BOOL CHolitechDlg::OnInitDialog()
 	
 	//Load the bitmaps of character sets and display icons
 	LoadBitmaps();
-#if 1
+
 	SetWindowPos(this, 0, 0, m_bmpBackgroundImage.GetBitmapDimension().cx, m_bmpBackgroundImage.GetBitmapDimension().cy, SW_SHOWMAXIMIZED|SWP_SHOWWINDOW);
-#else	// Support Sub-Monitor
-	// Find monitor quantity
-	if(::GetSystemMetrics(SM_CMONITORS) < 2)
-	{
-		//Center the window
-		SetWindowPos(this, 0, 0, m_bmpBackgroundImage.GetBitmapDimension().cx, m_bmpBackgroundImage.GetBitmapDimension().cy, SW_SHOWMAXIMIZED/*SWP_SHOWWINDOW*/);
-	}
-	else
-	{
-		// Display dialog on sub monitor position
-		HMONITOR	hMonitorThis, hMonitorTarget;
-		MONITORINFO oMonitorThis, oMonitorTarget;
-		POINT oPoint;
 
-		// Find monitor position of current window
-		hMonitorThis = ::MonitorFromWindow(this->GetSafeHwnd(), MONITOR_DEFAULTTONEAREST);
-
-		oMonitorThis.cbSize = sizeof(MONITORINFO);
-		::GetMonitorInfo(hMonitorThis, &oMonitorThis);
-
-		// Find monitor position of target window
-		if(oMonitorThis.rcMonitor.left != 0)
-		{
-			// There is current window on second monitor. Therefore, target window is main monitor(0, 0)
-			oPoint.x = 0;
-			oPoint.y = 0;
-			hMonitorTarget = ::MonitorFromPoint(oPoint, MONITOR_DEFAULTTONEAREST);
-			oMonitorTarget.cbSize = sizeof(MONITORINFO);
-			::GetMonitorInfo(hMonitorTarget, &oMonitorTarget);
-		}
-		else
-		{
-			// There is current window on Main monitor.
-			// It needs to find where second monitor is.
-			oPoint.x = -1;
-			oPoint.y = 0;
-			hMonitorTarget = ::MonitorFromPoint(oPoint, MONITOR_DEFAULTTONULL);
-			if(hMonitorTarget <= 0)
-			{
-				oPoint.x = oMonitorThis.rcMonitor.right+1;
-				oPoint.y = 0;
-				hMonitorTarget = ::MonitorFromPoint(oPoint, MONITOR_DEFAULTTONULL);
-			}
-			oMonitorTarget.cbSize = sizeof(MONITORINFO);
-			::GetMonitorInfo(hMonitorTarget, &oMonitorTarget);
-		}
-
-		MoveWindow(oPoint.x+700, oPoint.y+100, m_bmpBackgroundImage.GetBitmapDimension().cx, m_bmpBackgroundImage.GetBitmapDimension().cy);
-	}
-#endif
 	//Display all the bitmap butttons
 	DisplayButtons();
 
@@ -966,125 +895,67 @@ void CHolitechDlg::DisplayButtons()
 	CreateBitmapButton(&m_VolUp,		1480,	ROW2,	IDB_BITMAP_VOL_UP,		IDB_BITMAP_VOL_UP,		IDC_BUTTON_VOL_UP,		"");
 	CreateBitmapButton(&m_TemDn,		74,		ROW3,	IDB_BITMAP_TEM_DN,		IDB_BITMAP_TEM_DN,		IDC_BUTTON_TEM_DN,		"");
 	CreateBitmapButton(&m_TemUp,		373,	ROW3,	IDB_BITMAP_TEM_UP,		IDB_BITMAP_TEM_UP,		IDC_BUTTON_TEM_UP,		"");
-	CreateBitmapButton(&m_HeatSeat,		75,		ROW4,	IDB_BITMAP_HEATSEAT,	IDB_BITMAP_HEATSEAT,	IDC_BUTTON_HEATSEAT,	"");
-	CreateBitmapButton(&m_HeatSeat1,	75,		ROW4,	IDB_BITMAP_HEATSEAT1,	IDB_BITMAP_HEATSEAT1,	IDC_BUTTON_HEATSEAT1,	"");
-	CreateBitmapButton(&m_HeatSeat2,	75,		ROW4,	IDB_BITMAP_HEATSEAT2,	IDB_BITMAP_HEATSEAT2,	IDC_BUTTON_HEATSEAT2,	"");
-	CreateBitmapButton(&m_HeatSeat3,	75,		ROW4,	IDB_BITMAP_HEATSEAT3,	IDB_BITMAP_HEATSEAT3,	IDC_BUTTON_HEATSEAT3,	"");
-	CreateBitmapButton(&m_CoolSeat,		279,	ROW4,	IDB_BITMAP_COOLSEAT,	IDB_BITMAP_COOLSEAT,	IDC_BUTTON_COOLSEAT,	"");
-	CreateBitmapButton(&m_CoolSeat1,	279,	ROW4,	IDB_BITMAP_COOLSEAT1,	IDB_BITMAP_COOLSEAT1,	IDC_BUTTON_COOLSEAT1,	"");
-	CreateBitmapButton(&m_CoolSeat2,	279,	ROW4,	IDB_BITMAP_COOLSEAT2,	IDB_BITMAP_COOLSEAT2,	IDC_BUTTON_COOLSEAT2,	"");
-	CreateBitmapButton(&m_CoolSeat3,	279,	ROW4,	IDB_BITMAP_COOLSEAT3,	IDB_BITMAP_COOLSEAT3,	IDC_BUTTON_COOLSEAT3,	"");
-	CreateBitmapButton(&m_BodyFoot,		517,	ROW3,	IDB_BITMAP_BODYFOOT,	IDB_BITMAP_BODYFOOT,	IDC_BUTTON_BODYFOOT,	"");
-	CreateBitmapButton(&m_BodyFoot1,	517,	ROW3,	IDB_BITMAP_BODYFOOT1,	IDB_BITMAP_BODYFOOT1,	IDC_BUTTON_BODYFOOT1,	"");
-	CreateBitmapButton(&m_Head,			720,	ROW3,	IDB_BITMAP_HEAD,		IDB_BITMAP_HEAD,		IDC_BUTTON_HEAD,		"");
-	CreateBitmapButton(&m_Head1,		720,	ROW3,	IDB_BITMAP_HEAD1,		IDB_BITMAP_HEAD1,		IDC_BUTTON_HEAD1,		"");
-	CreateBitmapButton(&m_Foot,			517,	ROW4,	IDB_BITMAP_FOOT,		IDB_BITMAP_FOOT,		IDC_BUTTON_FOOT,		"");
-	CreateBitmapButton(&m_Foot1,		517,	ROW4,	IDB_BITMAP_FOOT1,		IDB_BITMAP_FOOT1,		IDC_BUTTON_FOOT1,		"");
-	CreateBitmapButton(&m_HeadFoot,		720,	ROW4,	IDB_BITMAP_HEADFOOT,	IDB_BITMAP_HEADFOOT,	IDC_BUTTON_HEADFOOT,	"");
-	CreateBitmapButton(&m_HeadFoot1,	720,	ROW4,	IDB_BITMAP_HEADFOOT1,	IDB_BITMAP_HEADFOOT1,	IDC_BUTTON_HEADFOOT1,	"");
+
+	m_HeatSeat.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(75, ROW4, 75, ROW4), this, IDC_BUTTON_HEATSEAT);
+	m_HeatSeat.LoadBitmaps(IDB_BITMAP_HEATSEAT, IDB_BITMAP_HEATSEAT1);
+	m_HeatSeat.SizeToContent();
+
+	m_CoolSeat.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(279, ROW4, 279, ROW4), this, IDC_BUTTON_COOLSEAT);
+	m_CoolSeat.LoadBitmaps(IDB_BITMAP_COOLSEAT, IDB_BITMAP_COOLSEAT1);
+	m_CoolSeat.SizeToContent();
+
+	m_BodyFoot.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(517, ROW3, 517, ROW3), this, IDC_BUTTON_BODYFOOT);
+	m_BodyFoot.LoadBitmaps(IDB_BITMAP_BODYFOOT, IDB_BITMAP_BODYFOOT1);
+	m_BodyFoot.SizeToContent();
+
+	m_Head.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(720, ROW3, 720, ROW3), this, IDC_BUTTON_HEAD);
+	m_Head.LoadBitmaps(IDB_BITMAP_HEAD, IDB_BITMAP_HEAD1);
+	m_Head.SizeToContent();
+
+	m_Foot.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(517, ROW4, 517, ROW4), this, IDC_BUTTON_FOOT);
+	m_Foot.LoadBitmaps(IDB_BITMAP_FOOT, IDB_BITMAP_FOOT1);
+	m_Foot.SizeToContent();
+
+	m_HeadFoot.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(720, ROW4, 720, ROW4), this, IDC_BUTTON_HEADFOOT);
+	m_HeadFoot.LoadBitmaps(IDB_BITMAP_HEADFOOT, IDB_BITMAP_HEADFOOT1);
+	m_HeadFoot.SizeToContent();
+
 	CreateBitmapButton(&m_VenDn,		965,	ROW4,	IDB_BITMAP_VEN_DN,		IDB_BITMAP_VEN_DN,		IDC_BUTTON_VEN_DN,		"");
 	CreateBitmapButton(&m_VenUo,		1170,	ROW4,	IDB_BITMAP_VEN_UP,		IDB_BITMAP_VEN_UP,		IDC_BUTTON_VEN_UP,		"");
 	CreateBitmapButton(&m_TemDn_Co,		1400,	ROW3,	IDB_BITMAP_TEM_DN,		IDB_BITMAP_TEM_DN,		IDC_BUTTON_TEM_DN_CO,	"");
 	CreateBitmapButton(&m_TemUp_Co,		1700,	ROW3,	IDB_BITMAP_TEM_UP,		IDB_BITMAP_TEM_UP,		IDC_BUTTON_TEM_UP_CO,	"");
-	CreateBitmapButton(&m_HeatSeat_Co,	1399,	ROW4,	IDB_BITMAP_HEATSEAT,	IDB_BITMAP_HEATSEAT,	IDC_BUTTON_HEATSEAT_CO,	"");
-	CreateBitmapButton(&m_HeatSeat_Co1,	1399,	ROW4,	IDB_BITMAP_HEATSEAT1,	IDB_BITMAP_HEATSEAT1,	IDC_BUTTON_HEATSEAT_CO1,"");
-	CreateBitmapButton(&m_HeatSeat_Co2,	1399,	ROW4,	IDB_BITMAP_HEATSEAT2,	IDB_BITMAP_HEATSEAT2,	IDC_BUTTON_HEATSEAT_CO2,"");
-	CreateBitmapButton(&m_HeatSeat_Co3,	1399,	ROW4,	IDB_BITMAP_HEATSEAT3,	IDB_BITMAP_HEATSEAT3,	IDC_BUTTON_HEATSEAT_CO3,"");
-	CreateBitmapButton(&m_CoolSeat_Co,	1605,	ROW4,	IDB_BITMAP_COOLSEAT,	IDB_BITMAP_COOLSEAT,	IDC_BUTTON_COOLSEAT_CO,	"");
-	CreateBitmapButton(&m_CoolSeat_Co1,	1605,	ROW4,	IDB_BITMAP_COOLSEAT1,	IDB_BITMAP_COOLSEAT1,	IDC_BUTTON_COOLSEAT_CO1,"");
-	CreateBitmapButton(&m_CoolSeat_Co2,	1605,	ROW4,	IDB_BITMAP_COOLSEAT2,	IDB_BITMAP_COOLSEAT2,	IDC_BUTTON_COOLSEAT_CO2,"");
-	CreateBitmapButton(&m_CoolSeat_Co3,	1605,	ROW4,	IDB_BITMAP_COOLSEAT3,	IDB_BITMAP_COOLSEAT3,	IDC_BUTTON_COOLSEAT_CO3,"");
-	CreateBitmapButton(&m_FrontHeat,	290,	ROW5,	IDB_BITMAP_FRONTHEAT,	IDB_BITMAP_FRONTHEAT,	IDC_BUTTON_FRONTHEAT,	"");
-	CreateBitmapButton(&m_FrontHeat1,	290,	ROW5,	IDB_BITMAP_FRONTHEAT1,	IDB_BITMAP_FRONTHEAT1,	IDC_BUTTON_FRONTHEAT1,	"");
-	CreateBitmapButton(&m_RearHeat,		505,	ROW5,	IDB_BITMAP_REARHEAT,	IDB_BITMAP_REARHEAT,	IDC_BUTTON_REARHEAT,	"");
-	CreateBitmapButton(&m_RearHeat1,	505,	ROW5,	IDB_BITMAP_REARHEAT1,	IDB_BITMAP_REARHEAT1,	IDC_BUTTON_REARHEAT1,	"");
-	CreateBitmapButton(&m_Auto,			725,	ROW5,	IDB_BITMAP_AUTO,		IDB_BITMAP_AUTO,		IDC_BUTTON_AUTO,		"");
-	CreateBitmapButton(&m_Auto1,		725,	ROW5,	IDB_BITMAP_AUTO1,		IDB_BITMAP_AUTO1,		IDC_BUTTON_AUTO1,		"");
-	CreateBitmapButton(&m_AC,			940,	ROW5,	IDB_BITMAP_AC,			IDB_BITMAP_AC,			IDC_BUTTON_AC,			"");
-	CreateBitmapButton(&m_AC1,			940,	ROW5,	IDB_BITMAP_AC1,			IDB_BITMAP_AC1,			IDC_BUTTON_AC1,			"");
-	CreateBitmapButton(&m_MaxAC,		1160,	ROW5,	IDB_BITMAP_MAX_AC,		IDB_BITMAP_MAX_AC,		IDC_BUTTON_MAX_AC,		"");
-	CreateBitmapButton(&m_MaxAC1,		1160,	ROW5,	IDB_BITMAP_MAX_AC1,		IDB_BITMAP_MAX_AC1,		IDC_BUTTON_MAX_AC1,		"");
-	CreateBitmapButton(&m_Air,			1375,	ROW5,	IDB_BITMAP_AIR,			IDB_BITMAP_AIR,			IDC_BUTTON_AIR,			"");
-	CreateBitmapButton(&m_Air1,			1375,	ROW5,	IDB_BITMAP_AIR1,		IDB_BITMAP_AIR1,		IDC_BUTTON_AIR1,		"");
 
-	GetDlgItem(IDC_BUTTON_HEATSEAT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_HEATSEAT1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEATSEAT2)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEATSEAT3)->ShowWindow(FALSE);
+	m_HeatSeat_Co.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1399, ROW4, 1399, ROW4), this, IDC_BUTTON_HEATSEAT_CO);
+	m_HeatSeat_Co.LoadBitmaps(IDB_BITMAP_HEATSEAT, IDB_BITMAP_HEATSEAT1);
+	m_HeatSeat_Co.SizeToContent();
 
-	GetDlgItem(IDC_BUTTON_COOLSEAT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_COOLSEAT1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_COOLSEAT2)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_COOLSEAT3)->ShowWindow(FALSE);
+	m_CoolSeat_Co.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1605, ROW4, 1605, ROW4), this, IDC_BUTTON_COOLSEAT_CO);
+	m_CoolSeat_Co.LoadBitmaps(IDB_BITMAP_COOLSEAT, IDB_BITMAP_COOLSEAT1);
+	m_CoolSeat_Co.SizeToContent();
 
-	GetDlgItem(IDC_BUTTON_HEATSEAT_CO)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_HEATSEAT_CO1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEATSEAT_CO2)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEATSEAT_CO3)->ShowWindow(FALSE);
+	m_FrontHeat.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(290, ROW5, 290, ROW5), this, IDC_BUTTON_FRONTHEAT);
+	m_FrontHeat.LoadBitmaps(IDB_BITMAP_FRONTHEAT, IDB_BITMAP_FRONTHEAT1);
+	m_FrontHeat.SizeToContent();
 
-	GetDlgItem(IDC_BUTTON_COOLSEAT_CO)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_COOLSEAT_CO1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_COOLSEAT_CO2)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_COOLSEAT_CO3)->ShowWindow(FALSE);
+	m_RearHeat.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(505, ROW5, 505, ROW5), this, IDC_BUTTON_REARHEAT);
+	m_RearHeat.LoadBitmaps(IDB_BITMAP_REARHEAT, IDB_BITMAP_REARHEAT1);
+	m_RearHeat.SizeToContent();
 
-	GetDlgItem(IDC_BUTTON_BODYFOOT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_HEAD)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_FOOT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_HEADFOOT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_BODYFOOT1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEAD1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_FOOT1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEADFOOT1)->ShowWindow(FALSE);
+	m_Auto.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(725, ROW5, 725, ROW5), this, IDC_BUTTON_AUTO);
+	m_Auto.LoadBitmaps(IDB_BITMAP_AUTO, IDB_BITMAP_AUTO1);
+	m_Auto.SizeToContent();
 
-	GetDlgItem(IDC_BUTTON_FRONTHEAT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_FRONTHEAT1)->ShowWindow(FALSE);
+	m_AC.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(940, ROW5, 940, ROW5), this, IDC_BUTTON_AC);
+	m_AC.LoadBitmaps(IDB_BITMAP_AC, IDB_BITMAP_AC1);
+	m_AC.SizeToContent();
 
-	GetDlgItem(IDC_BUTTON_REARHEAT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_REARHEAT1)->ShowWindow(FALSE);
+	m_MaxAC.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1160, ROW5, 1160, ROW5), this, IDC_BUTTON_MAX_AC);
+	m_MaxAC.LoadBitmaps(IDB_BITMAP_MAX_AC, IDB_BITMAP_MAX_AC1);
+	m_MaxAC.SizeToContent();
 
-	GetDlgItem(IDC_BUTTON_AUTO)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_AUTO1)->ShowWindow(FALSE);
-
-	GetDlgItem(IDC_BUTTON_AC)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_AC1)->ShowWindow(FALSE);
-
-	GetDlgItem(IDC_BUTTON_MAX_AC)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_MAX_AC1)->ShowWindow(FALSE);
-
-	GetDlgItem(IDC_BUTTON_AIR)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_AIR1)->ShowWindow(FALSE);
-
-/*
-#define PRE_X	117
-#define PRE_Y	172
-#define PRE_ITV	150
-
-#define CTL_Y	777
-
-	int x;
-
-	//Create each button for the GUI
-	CreateBitmapButton(&m_Minimize, 2045, 24, IDB_BITMAP_MINIMIZE_UP, IDB_BITMAP_MINIMIZE_DOWN, IDC_BUTTON_MINIMIZE, "Minimize");
-	CreateBitmapButton(&m_Restore, 2105, 24, IDB_BITMAP_RESTORE_UP, IDB_BITMAP_RESTORE_DOWN, IDC_BUTTON_RESTORE, "Window Shade Toggle");
-	CreateBitmapButton(&m_Close, 2165, 24, IDB_BITMAP_CLOSE_UP, IDB_BITMAP_CLOSE_DOWN, IDC_BUTTON_CLOSE, "Close");
-
-	CreateBitmapButton(&m_Preset1,				x=x+PRE_ITV,	PRE_Y, IDB_BITMAP_PRESET1_UP, IDB_BITMAP_PRESET1_DOWN, IDC_BUTTON_PRESET1, "1");
-	CreateBitmapButton(&m_Preset2,				x=x+PRE_ITV-4,	PRE_Y, IDB_BITMAP_PRESET2_UP, IDB_BITMAP_PRESET2_DOWN, IDC_BUTTON_PRESET2, "2");
-	CreateBitmapButton(&m_Preset3,				x=x+PRE_ITV,	PRE_Y, IDB_BITMAP_PRESET3_UP, IDB_BITMAP_PRESET3_DOWN, IDC_BUTTON_PRESET3, "3");
-	CreateBitmapButton(&m_Preset4,				x=x+PRE_ITV-4,	PRE_Y, IDB_BITMAP_PRESET4_UP, IDB_BITMAP_PRESET4_DOWN, IDC_BUTTON_PRESET4, "4");
-	CreateBitmapButton(&m_Preset5,				x=x+PRE_ITV,	PRE_Y, IDB_BITMAP_PRESET5_UP, IDB_BITMAP_PRESET5_DOWN, IDC_BUTTON_PRESET5, "5");
-	CreateBitmapButton(&m_Preset6,				x=x+PRE_ITV-4,	PRE_Y, IDB_BITMAP_PRESET6_UP, IDB_BITMAP_PRESET6_DOWN, IDC_BUTTON_PRESET6, "6");
-
-	CreateBitmapButton(&m_Mute,				1310,		CTL_Y+24,		IDB_BITMAP_MUTE_UP, IDB_BITMAP_MUTE_DOWN, IDC_BUTTON_MUTE, "Mute");
-
-
-	GetDlgItem(IDC_BUTTON_PRESETSCANUP_DOWN)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_PRESETSCANDOWN_DOWN)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_SCANUP_DOWN)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_SCANDOWN_DOWN)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_MUTE_DOWN)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_STEREOMONO_DOWN)->ShowWindow(FALSE);
-*/
+	m_Air.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1375, ROW5, 1375, ROW5), this, IDC_BUTTON_AIR);
+	m_Air.LoadBitmaps(IDB_BITMAP_AIR, IDB_BITMAP_AIR1);
+	m_Air.SizeToContent();
 }
 
 void CHolitechDlg::CreateBitmapButton(CBitmapButton* bitmapButton, int left, int top, UINT upResource, UINT downresource, UINT buttonResource, CString toolTipText)
@@ -1868,6 +1739,10 @@ void CHolitechDlg::OnTemDn()
 	if(m_Tem > 10) m_Tem--;
 
 	DrawBackground();
+
+	g_playbutt_hvac = FPLAY;
+
+	MediaPlay_HVAC();
 }
 
 void CHolitechDlg::OnTemUp()
@@ -1887,45 +1762,25 @@ void CHolitechDlg::OnHeatSeat()
 	{
 		case 0:
 		default:
-			GetDlgItem(IDC_BUTTON_HEATSEAT3)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT)->ShowWindow(TRUE);
+			m_HeatSeat.LoadBitmaps(IDB_BITMAP_HEATSEAT, IDB_BITMAP_HEATSEAT1);
 			break;
 		case 1:
-			GetDlgItem(IDC_BUTTON_HEATSEAT)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT1)->ShowWindow(TRUE);
+			m_HeatSeat.LoadBitmaps(IDB_BITMAP_HEATSEAT1, IDB_BITMAP_HEATSEAT2);
 			break;
 		case 2:
-			GetDlgItem(IDC_BUTTON_HEATSEAT1)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT2)->ShowWindow(TRUE);
+			m_HeatSeat.LoadBitmaps(IDB_BITMAP_HEATSEAT2, IDB_BITMAP_HEATSEAT3);
 			break;
 		case 3:
-			GetDlgItem(IDC_BUTTON_HEATSEAT2)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT3)->ShowWindow(TRUE);
+			m_HeatSeat.LoadBitmaps(IDB_BITMAP_HEATSEAT3, IDB_BITMAP_HEATSEAT);
 			break;
 	}
-
-	switch(m_CSDrv)
-	{
-		case 0:
-			break;
-		case 1:
-			GetDlgItem(IDC_BUTTON_COOLSEAT1)->ShowWindow(FALSE);
-			break;
-		case 2:
-			GetDlgItem(IDC_BUTTON_COOLSEAT2)->ShowWindow(FALSE);
-			break;
-		case 3:
-			GetDlgItem(IDC_BUTTON_COOLSEAT3)->ShowWindow(FALSE);
-			break;
-		default:
-			GetDlgItem(IDC_BUTTON_COOLSEAT1)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT2)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT3)->ShowWindow(FALSE);
-			break;
-	}
+	m_HeatSeat.SizeToContent();
+	m_HeatSeat.Invalidate();
 
 	m_CSDrv = 0;
-	GetDlgItem(IDC_BUTTON_COOLSEAT)->ShowWindow(TRUE);
+	m_CoolSeat.LoadBitmaps(IDB_BITMAP_COOLSEAT, IDB_BITMAP_COOLSEAT1);
+	m_CoolSeat.SizeToContent();
+	m_CoolSeat.Invalidate();
 }
 
 void CHolitechDlg::OnCoolSeat()
@@ -1938,45 +1793,25 @@ void CHolitechDlg::OnCoolSeat()
 	{
 		case 0:
 		default:
-			GetDlgItem(IDC_BUTTON_COOLSEAT3)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT)->ShowWindow(TRUE);
+			m_CoolSeat.LoadBitmaps(IDB_BITMAP_COOLSEAT, IDB_BITMAP_COOLSEAT1);
 			break;
 		case 1:
-			GetDlgItem(IDC_BUTTON_COOLSEAT)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT1)->ShowWindow(TRUE);
+			m_CoolSeat.LoadBitmaps(IDB_BITMAP_COOLSEAT1, IDB_BITMAP_COOLSEAT2);
 			break;
 		case 2:
-			GetDlgItem(IDC_BUTTON_COOLSEAT1)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT2)->ShowWindow(TRUE);
+			m_CoolSeat.LoadBitmaps(IDB_BITMAP_COOLSEAT2, IDB_BITMAP_COOLSEAT3);
 			break;
 		case 3:
-			GetDlgItem(IDC_BUTTON_COOLSEAT2)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT3)->ShowWindow(TRUE);
+			m_CoolSeat.LoadBitmaps(IDB_BITMAP_COOLSEAT3, IDB_BITMAP_COOLSEAT);
 			break;
 	}
-
-	switch(m_HSDrv)
-	{
-		case 0:
-			break;
-		case 1:
-			GetDlgItem(IDC_BUTTON_HEATSEAT1)->ShowWindow(FALSE);
-			break;
-		case 2:
-			GetDlgItem(IDC_BUTTON_HEATSEAT2)->ShowWindow(FALSE);
-			break;
-		case 3:
-			GetDlgItem(IDC_BUTTON_HEATSEAT3)->ShowWindow(FALSE);
-			break;
-		default:
-			GetDlgItem(IDC_BUTTON_HEATSEAT1)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT2)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT3)->ShowWindow(FALSE);
-			break;
-	}
+	m_CoolSeat.SizeToContent();
+	m_CoolSeat.Invalidate();
 
 	m_HSDrv = 0;
-	GetDlgItem(IDC_BUTTON_HEATSEAT)->ShowWindow(TRUE);
+	m_HeatSeat.LoadBitmaps(IDB_BITMAP_HEATSEAT, IDB_BITMAP_HEATSEAT1);
+	m_HeatSeat.SizeToContent();
+	m_HeatSeat.Invalidate();
 }
 
 void CHolitechDlg::OnBodyFoot()
@@ -1985,26 +1820,29 @@ void CHolitechDlg::OnBodyFoot()
 
 	if(m_BF)
 	{
-		GetDlgItem(IDC_BUTTON_BODYFOOT)->ShowWindow(FALSE);
-		GetDlgItem(IDC_BUTTON_BODYFOOT1)->ShowWindow(TRUE);
+		m_BodyFoot.LoadBitmaps(IDB_BITMAP_BODYFOOT1, IDB_BITMAP_BODYFOOT);
 	}
 	else
 	{
-		GetDlgItem(IDC_BUTTON_BODYFOOT)->ShowWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_BODYFOOT1)->ShowWindow(FALSE);
+		m_BodyFoot.LoadBitmaps(IDB_BITMAP_BODYFOOT, IDB_BITMAP_BODYFOOT1);
 	}
+	m_BodyFoot.SizeToContent();
+	m_BodyFoot.Invalidate();
 
 	m_H = FALSE;
+	m_Head.LoadBitmaps(IDB_BITMAP_HEAD,	IDB_BITMAP_HEAD1);
+	m_Head.SizeToContent();
+	m_Head.Invalidate();
+
 	m_F = FALSE;
+	m_Foot.LoadBitmaps(IDB_BITMAP_FOOT,	IDB_BITMAP_FOOT1);
+	m_Foot.SizeToContent();
+	m_Foot.Invalidate();
+
 	m_HF = FALSE;
-
-	GetDlgItem(IDC_BUTTON_HEAD)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_FOOT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_HEADFOOT)->ShowWindow(TRUE);
-
-	GetDlgItem(IDC_BUTTON_HEAD1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_FOOT1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEADFOOT1)->ShowWindow(FALSE);
+	m_HeadFoot.LoadBitmaps(IDB_BITMAP_HEADFOOT,	IDB_BITMAP_HEADFOOT1);
+	m_HeadFoot.SizeToContent();
+	m_HeadFoot.Invalidate();
 }
 
 void CHolitechDlg::OnHead()
@@ -2013,27 +1851,29 @@ void CHolitechDlg::OnHead()
 
 	if(m_H)
 	{
-		GetDlgItem(IDC_BUTTON_HEAD)->ShowWindow(FALSE);
-		GetDlgItem(IDC_BUTTON_HEAD1)->ShowWindow(TRUE);
+		m_Head.LoadBitmaps(IDB_BITMAP_HEAD1,	IDB_BITMAP_HEAD);
 	}
 	else
 	{
-		GetDlgItem(IDC_BUTTON_HEAD)->ShowWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_HEAD1)->ShowWindow(FALSE);
+		m_Head.LoadBitmaps(IDB_BITMAP_HEAD,	IDB_BITMAP_HEAD1);
 	}
+	m_Head.SizeToContent();
+	m_Head.Invalidate();
 
 	m_BF = FALSE;
+	m_BodyFoot.LoadBitmaps(IDB_BITMAP_BODYFOOT, IDB_BITMAP_BODYFOOT1);
+	m_BodyFoot.SizeToContent();
+	m_BodyFoot.Invalidate();
+
 	m_F = FALSE;
+	m_Foot.LoadBitmaps(IDB_BITMAP_FOOT,	IDB_BITMAP_FOOT1);
+	m_Foot.SizeToContent();
+	m_Foot.Invalidate();
+
 	m_HF = FALSE;
-
-	GetDlgItem(IDC_BUTTON_BODYFOOT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_FOOT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_HEADFOOT)->ShowWindow(TRUE);
-
-
-	GetDlgItem(IDC_BUTTON_BODYFOOT1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_FOOT1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEADFOOT1)->ShowWindow(FALSE);
+	m_HeadFoot.LoadBitmaps(IDB_BITMAP_HEADFOOT,	IDB_BITMAP_HEADFOOT1);
+	m_HeadFoot.SizeToContent();
+	m_HeadFoot.Invalidate();
 }
 
 void CHolitechDlg::OnFoot()
@@ -2042,26 +1882,29 @@ void CHolitechDlg::OnFoot()
 
 	if(m_F)
 	{
-		GetDlgItem(IDC_BUTTON_FOOT)->ShowWindow(FALSE);
-		GetDlgItem(IDC_BUTTON_FOOT1)->ShowWindow(TRUE);
+		m_Foot.LoadBitmaps(IDB_BITMAP_FOOT1,	IDB_BITMAP_FOOT);
 	}
 	else
 	{
-		GetDlgItem(IDC_BUTTON_FOOT)->ShowWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_FOOT1)->ShowWindow(FALSE);
+		m_Foot.LoadBitmaps(IDB_BITMAP_FOOT,	IDB_BITMAP_FOOT1);
 	}
+	m_Foot.SizeToContent();
+	m_Foot.Invalidate();
 
 	m_BF = FALSE;
+	m_BodyFoot.LoadBitmaps(IDB_BITMAP_BODYFOOT, IDB_BITMAP_BODYFOOT1);
+	m_BodyFoot.SizeToContent();
+	m_BodyFoot.Invalidate();
+
 	m_H = FALSE;
+	m_Head.LoadBitmaps(IDB_BITMAP_HEAD,	IDB_BITMAP_HEAD1);
+	m_Head.SizeToContent();
+	m_Head.Invalidate();
+
 	m_HF = FALSE;
-
-	GetDlgItem(IDC_BUTTON_BODYFOOT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_HEAD)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_HEADFOOT)->ShowWindow(TRUE);
-
-	GetDlgItem(IDC_BUTTON_BODYFOOT1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEAD1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEADFOOT1)->ShowWindow(FALSE);
+	m_HeadFoot.LoadBitmaps(IDB_BITMAP_HEADFOOT,	IDB_BITMAP_HEADFOOT1);
+	m_HeadFoot.SizeToContent();
+	m_HeadFoot.Invalidate();
 }
 
 void CHolitechDlg::OnHeadFoot()
@@ -2070,26 +1913,29 @@ void CHolitechDlg::OnHeadFoot()
 
 	if(m_HF)
 	{
-		GetDlgItem(IDC_BUTTON_HEADFOOT)->ShowWindow(FALSE);
-		GetDlgItem(IDC_BUTTON_HEADFOOT1)->ShowWindow(TRUE);
+		m_HeadFoot.LoadBitmaps(IDB_BITMAP_HEADFOOT1,	IDB_BITMAP_HEADFOOT);
 	}
 	else
 	{
-		GetDlgItem(IDC_BUTTON_HEADFOOT)->ShowWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_HEADFOOT1)->ShowWindow(FALSE);
+		m_HeadFoot.LoadBitmaps(IDB_BITMAP_HEADFOOT,	IDB_BITMAP_HEADFOOT1);
 	}
+	m_HeadFoot.SizeToContent();
+	m_HeadFoot.Invalidate();
 
 	m_BF = FALSE;
+	m_BodyFoot.LoadBitmaps(IDB_BITMAP_BODYFOOT, IDB_BITMAP_BODYFOOT1);
+	m_BodyFoot.SizeToContent();
+	m_BodyFoot.Invalidate();
+
 	m_H = FALSE;
+	m_Head.LoadBitmaps(IDB_BITMAP_HEAD,	IDB_BITMAP_HEAD1);
+	m_Head.SizeToContent();
+	m_Head.Invalidate();
+
 	m_F = FALSE;
-
-	GetDlgItem(IDC_BUTTON_BODYFOOT)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_HEAD)->ShowWindow(TRUE);
-	GetDlgItem(IDC_BUTTON_FOOT)->ShowWindow(TRUE);
-
-	GetDlgItem(IDC_BUTTON_BODYFOOT1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_HEAD1)->ShowWindow(FALSE);
-	GetDlgItem(IDC_BUTTON_FOOT1)->ShowWindow(FALSE);
+	m_Foot.LoadBitmaps(IDB_BITMAP_FOOT,	IDB_BITMAP_FOOT1);
+	m_Foot.SizeToContent();
+	m_Foot.Invalidate();
 }
 
 void CHolitechDlg::OnVenDn()
@@ -2097,6 +1943,8 @@ void CHolitechDlg::OnVenDn()
 	if(m_Ven > 0) m_Ven--;
 
 	DrawBackground();
+
+	if(m_HVACmaxac) OnMaxAC();
 }
 
 void CHolitechDlg::OnVenUp()
@@ -2130,45 +1978,25 @@ void CHolitechDlg::OnHeatSeatCo()
 	{
 		case 0:
 		default:
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO3)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO)->ShowWindow(TRUE);
+			m_HeatSeat_Co.LoadBitmaps(IDB_BITMAP_HEATSEAT, IDB_BITMAP_HEATSEAT1);
 			break;
 		case 1:
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO1)->ShowWindow(TRUE);
+			m_HeatSeat_Co.LoadBitmaps(IDB_BITMAP_HEATSEAT1, IDB_BITMAP_HEATSEAT2);
 			break;
 		case 2:
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO1)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO2)->ShowWindow(TRUE);
+			m_HeatSeat_Co.LoadBitmaps(IDB_BITMAP_HEATSEAT2, IDB_BITMAP_HEATSEAT3);
 			break;
 		case 3:
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO2)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO3)->ShowWindow(TRUE);
+			m_HeatSeat_Co.LoadBitmaps(IDB_BITMAP_HEATSEAT3, IDB_BITMAP_HEATSEAT);
 			break;
 	}
-
-	switch(m_CSCo)
-	{
-		case 0:
-			break;
-		case 1:
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO1)->ShowWindow(FALSE);
-			break;
-		case 2:
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO2)->ShowWindow(FALSE);
-			break;
-		case 3:
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO3)->ShowWindow(FALSE);
-			break;
-		default:
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO1)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO2)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO3)->ShowWindow(FALSE);
-			break;
-	}
+	m_HeatSeat_Co.SizeToContent();
+	m_HeatSeat_Co.Invalidate();
 
 	m_CSCo = 0;
-	GetDlgItem(IDC_BUTTON_COOLSEAT_CO)->ShowWindow(TRUE);
+	m_CoolSeat_Co.LoadBitmaps(IDB_BITMAP_COOLSEAT, IDB_BITMAP_COOLSEAT1);
+	m_CoolSeat_Co.SizeToContent();
+	m_CoolSeat_Co.Invalidate();
 }
 
 void CHolitechDlg::OnCoolSeatCo()
@@ -2181,45 +2009,25 @@ void CHolitechDlg::OnCoolSeatCo()
 	{
 		case 0:
 		default:
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO3)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO)->ShowWindow(TRUE);
+			m_CoolSeat_Co.LoadBitmaps(IDB_BITMAP_COOLSEAT, IDB_BITMAP_COOLSEAT1);
 			break;
 		case 1:
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO1)->ShowWindow(TRUE);
+			m_CoolSeat_Co.LoadBitmaps(IDB_BITMAP_COOLSEAT1, IDB_BITMAP_COOLSEAT2);
 			break;
 		case 2:
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO1)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO2)->ShowWindow(TRUE);
+			m_CoolSeat_Co.LoadBitmaps(IDB_BITMAP_COOLSEAT2, IDB_BITMAP_COOLSEAT3);
 			break;
 		case 3:
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO2)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_COOLSEAT_CO3)->ShowWindow(TRUE);
-		break;
-	}
-
-	switch(m_HSCo)
-	{
-		case 0:
-			break;
-		case 1:
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO1)->ShowWindow(FALSE);
-			break;
-		case 2:
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO2)->ShowWindow(FALSE);
-			break;
-		case 3:
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO3)->ShowWindow(FALSE);
-			break;
-		default:
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO1)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO2)->ShowWindow(FALSE);
-			GetDlgItem(IDC_BUTTON_HEATSEAT_CO3)->ShowWindow(FALSE);
+			m_CoolSeat_Co.LoadBitmaps(IDB_BITMAP_COOLSEAT3, IDB_BITMAP_COOLSEAT);
 			break;
 	}
+	m_CoolSeat_Co.SizeToContent();
+	m_CoolSeat_Co.Invalidate();
 
 	m_HSCo = 0;
-	GetDlgItem(IDC_BUTTON_HEATSEAT_CO)->ShowWindow(TRUE);
+	m_HeatSeat_Co.LoadBitmaps(IDB_BITMAP_HEATSEAT, IDB_BITMAP_HEATSEAT1);
+	m_HeatSeat_Co.SizeToContent();
+	m_HeatSeat_Co.Invalidate();
 }
 
 void CHolitechDlg::OnFrontHeat()
@@ -2228,14 +2036,14 @@ void CHolitechDlg::OnFrontHeat()
 
 	if(m_FH)
 	{
-		GetDlgItem(IDC_BUTTON_FRONTHEAT)->ShowWindow(FALSE);
-		GetDlgItem(IDC_BUTTON_FRONTHEAT1)->ShowWindow(TRUE);
+		m_FrontHeat.LoadBitmaps(IDB_BITMAP_FRONTHEAT1, IDB_BITMAP_FRONTHEAT);
 	}
 	else
 	{
-		GetDlgItem(IDC_BUTTON_FRONTHEAT)->ShowWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_FRONTHEAT1)->ShowWindow(FALSE);
+		m_FrontHeat.LoadBitmaps(IDB_BITMAP_FRONTHEAT, IDB_BITMAP_FRONTHEAT1);
 	}
+	m_FrontHeat.SizeToContent();
+	m_FrontHeat.Invalidate();
 }
 
 void CHolitechDlg::OnRearHeat()
@@ -2244,14 +2052,14 @@ void CHolitechDlg::OnRearHeat()
 
 	if(m_RH)
 	{
-		GetDlgItem(IDC_BUTTON_REARHEAT)->ShowWindow(FALSE);
-		GetDlgItem(IDC_BUTTON_REARHEAT1)->ShowWindow(TRUE);
+		m_RearHeat.LoadBitmaps(IDB_BITMAP_REARHEAT1, IDB_BITMAP_REARHEAT);
 	}
 	else
 	{
-		GetDlgItem(IDC_BUTTON_REARHEAT)->ShowWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_REARHEAT1)->ShowWindow(FALSE);
+		m_RearHeat.LoadBitmaps(IDB_BITMAP_REARHEAT, IDB_BITMAP_REARHEAT1);
 	}
+	m_RearHeat.SizeToContent();
+	m_RearHeat.Invalidate();
 }
 
 void CHolitechDlg::OnAuto()
@@ -2260,77 +2068,131 @@ void CHolitechDlg::OnAuto()
 
 	if(m_HVACauto)
 	{
-		GetDlgItem(IDC_BUTTON_AUTO)->ShowWindow(FALSE);
-		GetDlgItem(IDC_BUTTON_AUTO1)->ShowWindow(TRUE);
+		m_Auto.LoadBitmaps(IDB_BITMAP_AUTO1, IDB_BITMAP_AUTO);
+
+		if(!m_H) OnHead();
+
+		if(m_HVACmaxac) OnMaxAC();
 	}
 	else
 	{
-		GetDlgItem(IDC_BUTTON_AUTO)->ShowWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_AUTO1)->ShowWindow(FALSE);
+		m_Auto.LoadBitmaps(IDB_BITMAP_AUTO, IDB_BITMAP_AUTO1);
 	}
+	m_Auto.SizeToContent();
+	m_Auto.Invalidate();
 }
 
 void CHolitechDlg::OnAC()
 {
-	m_HVACac= !m_HVACac;
+	m_HVACac = !m_HVACac;
 
 	if(m_HVACac)
 	{
-		GetDlgItem(IDC_BUTTON_AC)->ShowWindow(FALSE);
-		GetDlgItem(IDC_BUTTON_AC1)->ShowWindow(TRUE);
+		m_AC.LoadBitmaps(IDB_BITMAP_AC1, IDB_BITMAP_AC);
 	}
 	else
 	{
-		GetDlgItem(IDC_BUTTON_AC)->ShowWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_AC1)->ShowWindow(FALSE);
+		m_AC.LoadBitmaps(IDB_BITMAP_AC, IDB_BITMAP_AC1);
 	}
+	m_AC.SizeToContent();
+	m_AC.Invalidate();
 }
 
 void CHolitechDlg::OnMaxAC()
 {
-	m_HVACmaxac= !m_HVACmaxac;
+	m_HVACmaxac = !m_HVACmaxac;
 
 	if(m_HVACmaxac)
 	{
-		GetDlgItem(IDC_BUTTON_MAX_AC)->ShowWindow(FALSE);
-		GetDlgItem(IDC_BUTTON_MAX_AC1)->ShowWindow(TRUE);
+		m_MaxAC.LoadBitmaps(IDB_BITMAP_MAX_AC1, IDB_BITMAP_MAX_AC);
+
+		// Auto Off
+		m_HVACauto = FALSE;
+		m_Auto.LoadBitmaps(IDB_BITMAP_AUTO, IDB_BITMAP_AUTO1);
+		m_Auto.SizeToContent();
+		m_Auto.Invalidate();
+
+		// A/C On
+		m_HVACac = TRUE;
+		m_AC.LoadBitmaps(IDB_BITMAP_AC1, IDB_BITMAP_AC);
+		m_AC.SizeToContent();
+		m_AC.Invalidate();
+
+		// Ventilation Max
+		m_Ven = 7;	
+		DrawBackground();
 	}
 	else
 	{
-		GetDlgItem(IDC_BUTTON_MAX_AC)->ShowWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_MAX_AC1)->ShowWindow(FALSE);
+		m_MaxAC.LoadBitmaps(IDB_BITMAP_MAX_AC, IDB_BITMAP_MAX_AC1);
 	}
-
-	mciOpen_hvac.lpstrElementName = "C4_The Caesars-Jerk It Out.mp3";;
-
-	MediaPlay_HVAC();
+	m_MaxAC.SizeToContent();
+	m_MaxAC.Invalidate();
 }
 
 void CHolitechDlg::OnAir()
 {
-	m_HVACair= !m_HVACair;
+	m_HVACair = !m_HVACair;
 
 	if(m_HVACair)
 	{
-		GetDlgItem(IDC_BUTTON_AIR)->ShowWindow(FALSE);
-		GetDlgItem(IDC_BUTTON_AIR1)->ShowWindow(TRUE);
+		m_Air.LoadBitmaps(IDB_BITMAP_AIR1, IDB_BITMAP_AIR);
 	}
 	else
 	{
-		GetDlgItem(IDC_BUTTON_AIR)->ShowWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_AIR1)->ShowWindow(FALSE);
+		m_Air.LoadBitmaps(IDB_BITMAP_AIR, IDB_BITMAP_AIR1);
 	}
+	m_Air.SizeToContent();
+	m_Air.Invalidate();
 }
 
 void CHolitechDlg::OnTimer(UINT nIDEvent) 
 {
 #if 1
 
+	static bool VenFlag = FALSE;
+
 	g_playtime++;
-	if(g_playtime >= g_tend)
+	if(g_playtime>=g_tend)
 	{
 		//OnNext();
 		//g_playbutt=FPLAY;														//현재 노래 재생이 끝났으므로
+	}
+
+
+	// Ventilating
+
+	mciOpen_hvac.lpstrElementName = "Ventilating.mp3";
+
+	g_playtime_hvac++;
+	if((g_playtime_hvac>=g_tend_hvac)&&(VenFlag==TRUE))
+	{
+		g_playbutt_hvac = FPLAY;														//현재 노래 재생이 끝났으므로
+		MediaPlay_HVAC();
+	}
+
+	if((VenFlag==TRUE)&&((m_Ven==0)&&(m_HVACauto==FALSE)&&(m_HVACmaxac==FALSE)))
+	{
+		VenFlag = FALSE;
+
+		g_playbutt_hvac = FPAUSE;
+		MediaPlay_HVAC();
+	}
+
+	if((VenFlag == FALSE)&&((m_Ven>0)||(m_HVACauto==TRUE)||(m_HVACmaxac==TRUE)))
+	{
+		VenFlag = TRUE;
+
+		g_playbutt_hvac = FPLAY;
+		MediaPlay_HVAC();
+	}
+
+	if(m_HVACauto)
+	{
+		if(m_Ven == 7) m_Ven = 0;
+		else m_Ven++;
+
+		DrawBackground();
 	}
 
 #else
@@ -2473,13 +2335,4 @@ BOOL CHolitechDlg::PreTranslateMessage(MSG* pMsg)
 		m_pToolTip->RelayEvent(pMsg);
 	
 	return CDialog::PreTranslateMessage(pMsg);
-}
-
-BOOL CHolitechDlg::OnEraseBkgnd(CDC* pDC)
-{
-	// TODO: Add your message handler code here and/or call default
-
-	return 0;
-
-	return CDialog::OnEraseBkgnd(pDC);
 }

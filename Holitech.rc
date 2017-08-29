@@ -98,12 +98,6 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 IDB_BITMAP_BACKGROUND   BITMAP                  "res\\Background.bmp"
-IDB_BITMAP_RESTORE_UP   BITMAP                  "res\\restore_up.bmp"
-IDB_BITMAP_CLOSE_DOWN   BITMAP                  "res\\close_down.bmp"
-IDB_BITMAP_CLOSE_UP     BITMAP                  "res\\close_up.bmp"
-IDB_BITMAP_MINIMIZE_DOWN BITMAP                  "res\\minimize_down.bmp"
-IDB_BITMAP_MINIMIZE_UP  BITMAP                  "res\\minimize_up.bmp"
-IDB_BITMAP_RESTORE_DOWN BITMAP                  "res\\restore_down.bmp"
 IDB_BITMAP_DOT_LARGE    BITMAP                  "res\\dot.bmp"
 IDB_BITMAP_0_LARGE      BITMAP                  "res\\0.bmp"
 IDB_BITMAP_1_LARGE      BITMAP                  "res\\1.bmp"

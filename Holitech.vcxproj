@@ -11,8 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <SccProjectName>"$/Holitech", EAOAAAAA</SccProjectName>
-    <SccLocalPath>.</SccLocalPath>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
     <Keyword>MFCProj</Keyword>
     <ProjectName>Holitech</ProjectName>
   </PropertyGroup>
