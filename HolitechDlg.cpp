@@ -6,6 +6,8 @@
 #include "HolitechDlg.h"
 #include <mmdeviceapi.h>
 #include <endpointvolume.h>
+#include "Digitalv.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -23,7 +25,6 @@ enum PlayFlag{
 };
 
 int dwID;					//mci에서 사용
-
 int g_playtime=0;			//재생 시간
 int g_tend=0;				//현재 재생되는 노래의 총 재생시간을 저장
 int g_stop=FOFFSTOP;		//스탑버튼이 눌렸는지의 유무
@@ -34,10 +35,10 @@ int g_playbutt=FPLAY;		//재생버튼이 눌렸는지 여부
 MCI_OPEN_PARMS mciOpen;		// Load files
 MCI_PLAY_PARMS mciPlay;		// Play files
 MCI_GENERIC_PARMS mciGeneric;	// Status of files
+MCI_DGV_SETAUDIO_PARMS mciParams = {0};
 
 
 int dwID_hvac;					//mci에서 사용
-
 int g_playtime_hvac=0;			//재생 시간
 int g_tend_hvac=0xFFFF;			//현재 재생되는 노래의 총 재생시간을 저장
 int g_stop_hvac=FOFFSTOP;		//스탑버튼이 눌렸는지의 유무
@@ -47,7 +48,7 @@ int g_playbutt_hvac=0;			//재생버튼이 눌렸는지 여부
 MCI_OPEN_PARMS mciOpen_hvac;	// Load files
 MCI_PLAY_PARMS mciPlay_hvac;	// Play files
 MCI_GENERIC_PARMS mciGeneric_hvac;	// Status of files
-
+MCI_DGV_SETAUDIO_PARMS mciParams_hvac = {0};
 
 HRESULT hr;
 
@@ -83,7 +84,7 @@ CHolitechDlg::CHolitechDlg(CWnd* pParent /*=NULL*/)
 	m_Frequency = 87.5;
 	m_TrackNo = 1;
 
-	m_AVNvolume = 0.1;
+	m_AVNvolume = 50;
 	m_AVNmode = CD;
 	m_AVNmute = false;
 
@@ -218,13 +219,22 @@ BOOL CHolitechDlg::OnInitDialog()
 	strcpy(m_TrayData.szTip, TITLE);
 
 	//Initialize the tray menu
-	m_TrayMenu.LoadMenu(IDR_TRAYMENU);
+//	m_TrayMenu.LoadMenu(IDR_TRAYMENU);
 
 	//Add to the tray
 	Shell_NotifyIcon(NIM_ADD, &m_TrayData);
 
 	MediaClose();
 	MediaClose_HVAC();
+
+	SetVolume(0.2);		//SetVolume(m_AVNvolume);
+	
+
+	mciParams.dwItem = MCI_DGV_SETAUDIO_VOLUME;
+	mciParams.dwValue = 500;
+
+	mciParams_hvac.dwItem = MCI_DGV_SETAUDIO_VOLUME;
+	mciParams_hvac.dwValue = 0;
 
 	//Start the poll to find a device
 //	SetTimer(TIMER_FIND_DEVICE, 1, NULL);
@@ -475,7 +485,7 @@ void CHolitechDlg::DrawVolume(CDC* memDC, CClientDC* dc)
 	CBitmap* pBmp = NULL;	
 	bool filledDisplay = false;
 
-	text.Format("VOL.%3u", (BYTE)(m_AVNvolume*100));
+	text.Format("VOL.%3u", m_AVNvolume);
 
 	for (/*i assinged above*/; (i < text.GetLength()) ; i++)
 	{
@@ -879,7 +889,7 @@ void CHolitechDlg::DisplayButtons()
 #define ROW3 615
 #define ROW4 766
 #define ROW5 930
-
+/*
 	CreateBitmapButton(&m_Mode,			181,	ROW1,	IDB_BITMAP_MODE,		IDB_BITMAP_MODE,		IDC_BUTTON_MODE,		"");
 	CreateBitmapButton(&m_Preset1,		398,	ROW1,	IDB_BITMAP_P1,			IDB_BITMAP_P1,			IDC_BUTTON_PRESET1,		"");
 	CreateBitmapButton(&m_Preset2,		610,	ROW1,	IDB_BITMAP_P2,			IDB_BITMAP_P2,			IDC_BUTTON_PRESET2,		"");
@@ -895,7 +905,7 @@ void CHolitechDlg::DisplayButtons()
 	CreateBitmapButton(&m_VolUp,		1480,	ROW2,	IDB_BITMAP_VOL_UP,		IDB_BITMAP_VOL_UP,		IDC_BUTTON_VOL_UP,		"");
 	CreateBitmapButton(&m_TemDn,		74,		ROW3,	IDB_BITMAP_TEM_DN,		IDB_BITMAP_TEM_DN,		IDC_BUTTON_TEM_DN,		"");
 	CreateBitmapButton(&m_TemUp,		373,	ROW3,	IDB_BITMAP_TEM_UP,		IDB_BITMAP_TEM_UP,		IDC_BUTTON_TEM_UP,		"");
-
+*/
 	m_HeatSeat.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(75, ROW4, 75, ROW4), this, IDC_BUTTON_HEATSEAT);
 	m_HeatSeat.LoadBitmaps(IDB_BITMAP_HEATSEAT, IDB_BITMAP_HEATSEAT1);
 	m_HeatSeat.SizeToContent();
@@ -1091,47 +1101,6 @@ void CHolitechDlg::LoadBitmapAndCoordinates(CBitmap* bmp, UINT resourceID)
 	bmp->SetBitmapDimension(bitmap.bmWidth, bitmap.bmHeight);
 }
 
-void CHolitechDlg::RemoveButtons()
-{
-	delete GetDlgItem(IDC_BUTTON_MINIMIZE);
-	delete GetDlgItem(IDC_BUTTON_RESTORE);
-	delete GetDlgItem(IDC_BUTTON_CLOSE);
-
-	delete GetDlgItem(IDC_BUTTON_MODE);
-	delete GetDlgItem(IDC_BUTTON_PRESET1);
-	delete GetDlgItem(IDC_BUTTON_PRESET2);
-	delete GetDlgItem(IDC_BUTTON_PRESET3);
-	delete GetDlgItem(IDC_BUTTON_PRESET4);
-	delete GetDlgItem(IDC_BUTTON_PRESET5);
-	delete GetDlgItem(IDC_BUTTON_PRESET6);
-	delete GetDlgItem(IDC_BUTTON_PRE);
-	delete GetDlgItem(IDC_BUTTON_PLAY);
-	delete GetDlgItem(IDC_BUTTON_NEXT);
-	delete GetDlgItem(IDC_BUTTON_MUTE);
-	delete GetDlgItem(IDC_BUTTON_VOL_DN);
-	delete GetDlgItem(IDC_BUTTON_VOL_UP);
-	delete GetDlgItem(IDC_BUTTON_TEM_DN);
-	delete GetDlgItem(IDC_BUTTON_TEM_UP);
-	delete GetDlgItem(IDC_BUTTON_HEATSEAT);
-	delete GetDlgItem(IDC_BUTTON_COOLSEAT);
-	delete GetDlgItem(IDC_BUTTON_BODYFOOT);
-	delete GetDlgItem(IDC_BUTTON_HEAD);
-	delete GetDlgItem(IDC_BUTTON_FOOT);
-	delete GetDlgItem(IDC_BUTTON_HEADFOOT);
-	delete GetDlgItem(IDC_BUTTON_VEN_DN);
-	delete GetDlgItem(IDC_BUTTON_VEN_UP);
-	delete GetDlgItem(IDC_BUTTON_TEM_DN_CO);
-	delete GetDlgItem(IDC_BUTTON_TEM_UP_CO);
-	delete GetDlgItem(IDC_BUTTON_HEATSEAT_CO);
-	delete GetDlgItem(IDC_BUTTON_COOLSEAT_CO);
-	delete GetDlgItem(IDC_BUTTON_FRONTHEAT);
-	delete GetDlgItem(IDC_BUTTON_REARHEAT);
-	delete GetDlgItem(IDC_BUTTON_AUTO);
-	delete GetDlgItem(IDC_BUTTON_AC);
-	delete GetDlgItem(IDC_BUTTON_MAX_AC);
-	delete GetDlgItem(IDC_BUTTON_AIR);
-}
-
 void CHolitechDlg::KeyUp(BYTE key) 
 {
 	//Determine which key came up and handle it
@@ -1160,9 +1129,6 @@ void CHolitechDlg::OnCancel()
 
 	//Cleanup the tooltips
 	delete(m_pToolTip);
-
-	//Remove the buttons
-	RemoveButtons();
 
 	//Set the handle in the App to null
 	((CHolitechApp*)AfxGetApp())->m_hwndDialog = NULL;
@@ -1328,6 +1294,9 @@ void CHolitechDlg::MediaPlay()
 		mciSendCommand(dwID, MCI_PLAY, MCI_FROM,(DWORD)(LPVOID)&mciPlay);
 		break;
 	}
+
+	if(m_AVNmute) return;
+	mciSendCommand(dwID, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams);
 }
 
 void CHolitechDlg::MediaStop()
@@ -1403,6 +1372,8 @@ void CHolitechDlg::MediaPlay_HVAC()
 		mciSendCommand(dwID_hvac, MCI_PLAY, MCI_FROM,(DWORD)(LPVOID)&mciPlay);
 		break;
 	}
+
+	mciSendCommand(dwID_hvac, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams_hvac);
 }
 
 void CHolitechDlg::MediaClose_HVAC()
@@ -1567,7 +1538,8 @@ void CHolitechDlg::OnPreset6()
 
 		//Setting file path
 		//mciOpen.lpstrElementName = "E:\\MyDrive\\0. Work\\AVN GUI\\Source\\R6_Sheeran-Shape Of You.mp3";
-		mciOpen.lpstrElementName = "R6_Sheeran-Shape Of You.mp3";
+		//mciOpen.lpstrElementName = "R6_Sheeran-Shape Of You.mp3";
+		mciOpen.lpstrElementName = "R6_IU-Palette.mp3";
 	}
 	else
 	{
@@ -1709,27 +1681,40 @@ void CHolitechDlg::OnMute()
 {
 	m_AVNmute = !m_AVNmute;
 
-	SetMute();
+	//SetMute();
+
+	if(m_AVNmute) mciParams.dwValue = 0;
+	else mciParams.dwValue = m_AVNvolume*10;
+
+	mciSendCommand(dwID, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams);
 
 	UpdateMute();
 }
 
 void CHolitechDlg::OnVolDn()
 {
-	if(m_AVNvolume != 0) m_AVNvolume = m_AVNvolume-0.05;
-	else m_AVNvolume = 0.2;
+	if(m_AVNmute) return;
 
-	SetVolume(m_AVNvolume);
+	if(m_AVNvolume <= 0) m_AVNvolume = 0;
+	else m_AVNvolume = m_AVNvolume-5;
+
+	//	SetVolume(m_AVNvolume);
+	mciParams.dwValue = m_AVNvolume*10;
+	mciSendCommand(dwID, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams);
 
 	UpdateVolume();
 }
 
 void CHolitechDlg::OnVolUp()
 {
-	if(m_AVNvolume != 1.0) m_AVNvolume = m_AVNvolume+0.05;
-	else m_AVNvolume = 0.2;
+	if(m_AVNmute) return;
 
-	SetVolume(m_AVNvolume);
+	if(m_AVNvolume >= 100) m_AVNvolume = 100;
+	else m_AVNvolume = m_AVNvolume+5;
+
+//	SetVolume(m_AVNvolume);
+	mciParams.dwValue = m_AVNvolume*10;
+	mciSendCommand(dwID, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams);
 
 	UpdateVolume();
 }
@@ -1739,10 +1724,6 @@ void CHolitechDlg::OnTemDn()
 	if(m_Tem > 10) m_Tem--;
 
 	DrawBackground();
-
-	g_playbutt_hvac = FPLAY;
-
-	MediaPlay_HVAC();
 }
 
 void CHolitechDlg::OnTemUp()
@@ -1944,6 +1925,9 @@ void CHolitechDlg::OnVenDn()
 
 	DrawBackground();
 
+	mciParams_hvac.dwValue = m_Ven*100;
+	mciSendCommand(dwID_hvac, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams_hvac);
+
 	if(m_HVACmaxac) OnMaxAC();
 }
 
@@ -1952,6 +1936,9 @@ void CHolitechDlg::OnVenUp()
 	if(m_Ven < 7) m_Ven++;
 
 	DrawBackground();
+
+	mciParams_hvac.dwValue = m_Ven*100;
+	mciSendCommand(dwID_hvac, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams_hvac);
 }
 
 void CHolitechDlg::OnTemDnCo()
@@ -2073,10 +2060,16 @@ void CHolitechDlg::OnAuto()
 		if(!m_H) OnHead();
 
 		if(m_HVACmaxac) OnMaxAC();
+
+		mciParams_hvac.dwValue = 500;
+		mciSendCommand(dwID_hvac, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams_hvac);
 	}
 	else
 	{
 		m_Auto.LoadBitmaps(IDB_BITMAP_AUTO, IDB_BITMAP_AUTO1);
+
+		mciParams_hvac.dwValue = m_Ven*100;
+		mciSendCommand(dwID_hvac, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams_hvac);
 	}
 	m_Auto.SizeToContent();
 	m_Auto.Invalidate();
@@ -2121,10 +2114,16 @@ void CHolitechDlg::OnMaxAC()
 		// Ventilation Max
 		m_Ven = 7;	
 		DrawBackground();
+
+		mciParams_hvac.dwValue = 1000;
+		mciSendCommand(dwID_hvac, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams_hvac);
 	}
 	else
 	{
 		m_MaxAC.LoadBitmaps(IDB_BITMAP_MAX_AC, IDB_BITMAP_MAX_AC1);
+
+		mciParams_hvac.dwValue = m_Ven*100;
+		mciSendCommand(dwID_hvac, MCI_SETAUDIO, MCI_DGV_SETAUDIO_ITEM | MCI_DGV_SETAUDIO_VALUE, (DWORD) & mciParams_hvac);
 	}
 	m_MaxAC.SizeToContent();
 	m_MaxAC.Invalidate();
@@ -2165,7 +2164,7 @@ void CHolitechDlg::OnTimer(UINT nIDEvent)
 	mciOpen_hvac.lpstrElementName = "Ventilating.mp3";
 
 	g_playtime_hvac++;
-	if((g_playtime_hvac>=g_tend_hvac)&&(VenFlag==TRUE))
+	if((g_playtime_hvac>=(g_tend_hvac-15))&&(VenFlag==TRUE))
 	{
 		g_playbutt_hvac = FPLAY;														//현재 노래 재생이 끝났으므로
 		MediaPlay_HVAC();

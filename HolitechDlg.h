@@ -136,7 +136,7 @@ protected:
 
 	//Volume/Display/Radio control variables
  	BYTE m_AVNmode;
-	float m_AVNvolume;
+	char m_AVNvolume;
 	BOOL m_AVNmute;
 
 	float m_Frequency;
@@ -320,7 +320,6 @@ protected:
 	void CreateBitmapButton(CBitmapButton* bitmapButton, int left, int top, UINT upResource, UINT downresource, UINT buttonResource, CString toolTipText);
 	CBitmap* GetAlphanumericLargeBitmap(char c);
 	CBitmap* GetAlphanumericSmallBitmap(char c);
-	void RemoveButtons();
 
 	//Tray function
 	void ShowTrayMenu(CPoint pt);
