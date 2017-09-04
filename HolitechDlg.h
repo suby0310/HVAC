@@ -175,7 +175,7 @@ protected:
 	CBitmapButton m_HeatSeat;
 	CBitmapButton m_CoolSeat;
 	CBitmapButton m_VenDn;
-	CBitmapButton m_VenUo;
+	CBitmapButton m_VenUp;
 	CBitmapButton m_TemDn_Co;
 	CBitmapButton m_TemUp_Co;
 	CBitmapButton m_HeatSeat_Co;
@@ -276,19 +276,14 @@ protected:
 	CBitmap m_bmpYSmall;
 	CBitmap m_bmpZSmall;
 	CBitmap m_bmpZSpecial;
-	CBitmap m_bmpLampColOff;
-	CBitmap m_bmpLampColOn;
-	CBitmap m_bmpLampRowOff;
-	CBitmap m_bmpLampRowOn;
-	CBitmap m_bmpLampSeatBlue;
-	CBitmap m_bmpLampSeatOff;
-	CBitmap m_bmpLampSeatRed;
-	CBitmap m_bmpVenFanOff;
-	CBitmap m_bmpVenFanOn;
 	CBitmap m_bmpVenOff;
-	CBitmap m_bmpVenOn;
-
-	CBitmap m_bmpVolumeSlide;
+	CBitmap m_bmpVenOn1;
+	CBitmap m_bmpVenOn2;
+	CBitmap m_bmpVenOn3;
+	CBitmap m_bmpVenOn4;
+	CBitmap m_bmpVenOn5;
+	CBitmap m_bmpVenOn6;
+	CBitmap m_bmpVenOn7;
 
 	//Drawing functions
 	void DrawBackground();
@@ -298,7 +293,7 @@ protected:
 	void DrawVolume(CDC* memDC, CClientDC* dc);
 	void DrawTemperature(CDC* memDC, CClientDC* dc);
 	void DrawTemperatureCo(CDC* memDC, CClientDC* dc);	
-	void DrawLampVentilation(CDC* memDC, CClientDC* dc);
+	void DrawVentilation(CDC* memDC, CClientDC* dc);
 	void DrawBitmapOnDC(CDC* memDC, CClientDC* cDC, CBitmap* bmp, int x, int y);
 	void DrawBitmapOnDC(CDC* memDC, CClientDC* cDC, CBitmap* bmp, int x, int y, UINT transparentColor);
 

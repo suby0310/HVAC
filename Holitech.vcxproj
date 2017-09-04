@@ -306,6 +306,7 @@
     <CustomBuild Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\AVN GUI\Source\res\holitech_icon.ico" />
     <None Include="res\ac.bmp" />
     <None Include="res\ac_1.bmp" />
     <None Include="res\air.bmp" />
@@ -324,6 +325,10 @@
     <None Include="res\coolseat_1.bmp" />
     <None Include="res\coolseat_2.bmp" />
     <None Include="res\coolseat_3.bmp" />
+    <None Include="res\coolseat_co.bmp" />
+    <None Include="res\coolseat_co_1.bmp" />
+    <None Include="res\coolseat_co_2.bmp" />
+    <None Include="res\coolseat_co_3.bmp" />
     <None Include="res\foot.bmp" />
     <None Include="res\foot_1.bmp" />
     <None Include="res\frontheat.bmp" />
@@ -339,6 +344,10 @@
     <None Include="res\heatseat_1.bmp" />
     <None Include="res\heatseat_2.bmp" />
     <None Include="res\heatseat_3.bmp" />
+    <None Include="res\heatseat_co.bmp" />
+    <None Include="res\heatseat_co_1.bmp" />
+    <None Include="res\heatseat_co_2.bmp" />
+    <None Include="res\heatseat_co_3.bmp" />
     <None Include="res\Holitech BMP\holitech_icon.ico" />
     <None Include="res\holitech bmp\icon1.ico" />
     <None Include="res\holitech_icon.ico" />
@@ -370,13 +379,23 @@
     <None Include="res\rearheat.bmp" />
     <None Include="res\rearheat_1.bmp" />
     <None Include="res\tem+.bmp" />
+    <None Include="res\tem+_co.bmp" />
     <None Include="res\tem-.bmp" />
+    <None Include="res\tem-_co.bmp" />
     <None Include="res\ven+.bmp" />
     <None Include="res\ven-.bmp" />
     <None Include="res\Ventilating_F_Off.bmp" />
     <None Include="res\Ventilating_F_On.bmp" />
     <None Include="res\Ventilating_Off.bmp" />
     <None Include="res\Ventilating_On.bmp" />
+    <None Include="res\ven_1.bmp" />
+    <None Include="res\ven_2.bmp" />
+    <None Include="res\ven_3.bmp" />
+    <None Include="res\ven_4.bmp" />
+    <None Include="res\ven_5.bmp" />
+    <None Include="res\ven_6.bmp" />
+    <None Include="res\ven_7.bmp" />
+    <None Include="res\ven_off.bmp" />
     <None Include="res\vol+.bmp" />
     <None Include="res\vol-.bmp" />
     <None Include="res\z_special.bmp" />

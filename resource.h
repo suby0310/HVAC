@@ -114,17 +114,6 @@
 #define IDB_BITMAP_MAX_AC               323
 #define IDB_BITMAP_REARHEAT             324
 #define IDB_BITMAP_Z_SPECIAL            325
-#define IDB_BITMAP_LAMP_COL_OFF         326
-#define IDB_BITMAP_LAMP_COL_ON          327
-#define IDB_BITMAP_LAMP_ROW_OFF         328
-#define IDB_BITMAP_LAMP_ROW_ON          329
-#define IDB_BITMAP_LAMP_SEAT_BLUE       330
-#define IDB_BITMAP_LAMP_SEAT_OFF        331
-#define IDB_BITMAP_LAMP_SEAT_RED        332
-#define IDB_BITMAP_VEN_FAN_OFF          333
-#define IDB_BITMAP_VEN_FAN_ON           334
-#define IDB_BITMAP_VEN_OFF              335
-#define IDB_BITMAP_VEN_ON               336
 #define IDB_BITMAP_AC1                  337
 #define IDB_BITMAP_AIR1                 338
 #define IDB_BITMAP_AUTO1                339
@@ -145,6 +134,24 @@
 #define IDB_BITMAP_HEATSEAT3            354
 #define IDB_BITMAP_MAX_AC1              355
 #define IDB_BITMAP_REARHEAT1            356
+#define IDB_BITMAP_COOLSEAT_CO          357
+#define IDB_BITMAP_COOLSEAT1_CO         358
+#define IDB_BITMAP_COOLSEAT2_CO         359
+#define IDB_BITMAP_COOLSEAT3_CO         360
+#define IDB_BITMAP_HEATSEAT_CO          361
+#define IDB_BITMAP_HEATSEAT1_CO         362
+#define IDB_BITMAP_HEATSEAT2_CO         363
+#define IDB_BITMAP_HEATSEAT3_CO         364
+#define IDB_BITMAP_TEM_DN_CO            365
+#define IDB_BITMAP_TEM_UP_CO            366
+#define IDB_BITMAP_VEN_ON1              367
+#define IDB_BITMAP_VEN_ON2              368
+#define IDB_BITMAP_VEN_ON3              369
+#define IDB_BITMAP_VEN_ON4              370
+#define IDB_BITMAP_VEN_ON5              371
+#define IDB_BITMAP_VEN_ON6              372
+#define IDB_BITMAP_VEN_ON7              373
+#define IDB_BITMAP_VEN_OFF              374
 #define IDC_BUTTON_MODE                 1000
 #define IDC_BUTTON_PRESET1              1001
 #define IDC_BUTTON_PRESET2              1002
@@ -168,7 +175,6 @@
 #define IDC_BUTTON_TEM_DN_CO            1026
 #define IDC_BUTTON_TEM_UP_CO            1027
 #define IDC_BUTTON_PRESETS              1042
-
 #define IDC_BUTTON_HEATSEAT             1100
 #define IDC_BUTTON_COOLSEAT             1104
 #define IDC_BUTTON_HEATSEAT_CO          1108
@@ -205,7 +211,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        357
+#define _APS_NEXT_RESOURCE_VALUE        375
 #define _APS_NEXT_COMMAND_VALUE         32789
 #define _APS_NEXT_CONTROL_VALUE         1079
 #define _APS_NEXT_SYMED_VALUE           101
