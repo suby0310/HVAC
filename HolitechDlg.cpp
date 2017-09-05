@@ -833,22 +833,22 @@ void CHolitechDlg::DisplayButtons()
 #define ROW4 750
 #define ROW5 902
 
-	CreateBitmapButton(&m_Mode,			179,	ROW1,	IDB_BITMAP_MODE,		IDB_BITMAP_MODE,		IDC_BUTTON_MODE,		"");
-	CreateBitmapButton(&m_Preset1,		413,	ROW1,	IDB_BITMAP_P1,			IDB_BITMAP_P1,			IDC_BUTTON_PRESET1,		"");
-	CreateBitmapButton(&m_Preset2,		632,	ROW1,	IDB_BITMAP_P2,			IDB_BITMAP_P2,			IDC_BUTTON_PRESET2,		"");
-	CreateBitmapButton(&m_Preset3,		851,	ROW1,	IDB_BITMAP_P3,			IDB_BITMAP_P3,			IDC_BUTTON_PRESET3,		"");
-	CreateBitmapButton(&m_Preset4,		1071,	ROW1,	IDB_BITMAP_P4,			IDB_BITMAP_P4,			IDC_BUTTON_PRESET4,		"");
-	CreateBitmapButton(&m_Preset5,		1290,	ROW1,	IDB_BITMAP_P5,			IDB_BITMAP_P5,			IDC_BUTTON_PRESET5,		"");
-	CreateBitmapButton(&m_Preset6,		1510,	ROW1,	IDB_BITMAP_P6,			IDB_BITMAP_P6,			IDC_BUTTON_PRESET6,		"");
-	CreateBitmapButton(&m_Pre,			413,	ROW2,	IDB_BITMAP_PRE,			IDB_BITMAP_PRE,			IDC_BUTTON_PRE,			"");
-	CreateBitmapButton(&m_Play,			632,	ROW2,	IDB_BITMAP_PLAY,		IDB_BITMAP_PLAY,		IDC_BUTTON_PLAY,		"");
-	CreateBitmapButton(&m_Next,			851,	ROW2,	IDB_BITMAP_NEXT,		IDB_BITMAP_NEXT,		IDC_BUTTON_NEXT,		"");
-	CreateBitmapButton(&m_Mute,			1071,	ROW2,	IDB_BITMAP_MUTE,		IDB_BITMAP_MUTE,		IDC_BUTTON_MUTE,		"");
-	CreateBitmapButton(&m_VolDn,		1290,	ROW2,	IDB_BITMAP_VOL_DN,		IDB_BITMAP_VOL_DN,		IDC_BUTTON_VOL_DN,		"");
-	CreateBitmapButton(&m_VolUp,		1510,	ROW2,	IDB_BITMAP_VOL_UP,		IDB_BITMAP_VOL_UP,		IDC_BUTTON_VOL_UP,		"");
+	CreateBitmapButton(&m_Mode,			179,	ROW1,	IDB_BITMAP_MODE,		IDB_BITMAP_MODE_1,		IDC_BUTTON_MODE,		"");
+	CreateBitmapButton(&m_Preset1,		413,	ROW1,	IDB_BITMAP_P1,			IDB_BITMAP_P1_1,		IDC_BUTTON_PRESET1,		"");
+	CreateBitmapButton(&m_Preset2,		632,	ROW1,	IDB_BITMAP_P2,			IDB_BITMAP_P2_1,		IDC_BUTTON_PRESET2,		"");
+	CreateBitmapButton(&m_Preset3,		851,	ROW1,	IDB_BITMAP_P3,			IDB_BITMAP_P3_1,		IDC_BUTTON_PRESET3,		"");
+	CreateBitmapButton(&m_Preset4,		1071,	ROW1,	IDB_BITMAP_P4,			IDB_BITMAP_P4_1,		IDC_BUTTON_PRESET4,		"");
+	CreateBitmapButton(&m_Preset5,		1290,	ROW1,	IDB_BITMAP_P5,			IDB_BITMAP_P5_1,		IDC_BUTTON_PRESET5,		"");
+	CreateBitmapButton(&m_Preset6,		1510,	ROW1,	IDB_BITMAP_P6,			IDB_BITMAP_P6_1,		IDC_BUTTON_PRESET6,		"");
+	CreateBitmapButton(&m_Pre,			413,	ROW2,	IDB_BITMAP_PRE,			IDB_BITMAP_PRE_1,		IDC_BUTTON_PRE,			"");
+	CreateBitmapButton(&m_Play,			632,	ROW2,	IDB_BITMAP_PLAY,		IDB_BITMAP_PLAY_1,		IDC_BUTTON_PLAY,		"");
+	CreateBitmapButton(&m_Next,			851,	ROW2,	IDB_BITMAP_NEXT,		IDB_BITMAP_NEXT_1,		IDC_BUTTON_NEXT,		"");
+	CreateBitmapButton(&m_Mute,			1071,	ROW2,	IDB_BITMAP_MUTE,		IDB_BITMAP_MUTE_1,		IDC_BUTTON_MUTE,		"");
+	CreateBitmapButton(&m_VolDn,		1290,	ROW2,	IDB_BITMAP_VOL_DN,		IDB_BITMAP_VOL_DN_1,	IDC_BUTTON_VOL_DN,		"");
+	CreateBitmapButton(&m_VolUp,		1510,	ROW2,	IDB_BITMAP_VOL_UP,		IDB_BITMAP_VOL_UP_1,	IDC_BUTTON_VOL_UP,		"");
 
-	CreateBitmapButton(&m_TemDn,		86,		ROW3,	IDB_BITMAP_TEM_DN,		IDB_BITMAP_TEM_DN,		IDC_BUTTON_TEM_DN,		"");
-	CreateBitmapButton(&m_TemUp,		374,	ROW3,	IDB_BITMAP_TEM_UP,		IDB_BITMAP_TEM_UP,		IDC_BUTTON_TEM_UP,		"");
+	CreateBitmapButton(&m_TemDn,		86,		ROW3,	IDB_BITMAP_TEM_DN,		IDB_BITMAP_TEM_DN_1,	IDC_BUTTON_TEM_DN,		"");
+	CreateBitmapButton(&m_TemUp,		374,	ROW3,	IDB_BITMAP_TEM_UP,		IDB_BITMAP_TEM_UP_1,	IDC_BUTTON_TEM_UP,		"");
 
 	m_HeatSeat.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(86, ROW4, 86, ROW4), this, IDC_BUTTON_HEATSEAT);
 	m_HeatSeat.LoadBitmaps(IDB_BITMAP_HEATSEAT, IDB_BITMAP_HEATSEAT1);
@@ -874,11 +874,11 @@ void CHolitechDlg::DisplayButtons()
 	m_HeadFoot.LoadBitmaps(IDB_BITMAP_HEADFOOT, IDB_BITMAP_HEADFOOT1);
 	m_HeadFoot.SizeToContent();
 
-	CreateBitmapButton(&m_VenDn,	976,	ROW4,	IDB_BITMAP_VEN_DN,		IDB_BITMAP_VEN_DN,		IDC_BUTTON_VEN_DN,		"");
-	CreateBitmapButton(&m_VenUp,	1184,	ROW4,	IDB_BITMAP_VEN_UP,		IDB_BITMAP_VEN_UP,		IDC_BUTTON_VEN_UP,		"");
+	CreateBitmapButton(&m_VenDn,	976,	ROW4,	IDB_BITMAP_VEN_DN,		IDB_BITMAP_VEN_DN_1,	IDC_BUTTON_VEN_DN,		"");
+	CreateBitmapButton(&m_VenUp,	1184,	ROW4,	IDB_BITMAP_VEN_UP,		IDB_BITMAP_VEN_UP_1,	IDC_BUTTON_VEN_UP,		"");
 
-	CreateBitmapButton(&m_TemDn_Co,	1422,	ROW3,	IDB_BITMAP_TEM_DN_CO,	IDB_BITMAP_TEM_DN_CO,	IDC_BUTTON_TEM_DN_CO,	"");
-	CreateBitmapButton(&m_TemUp_Co,	1712,	ROW3,	IDB_BITMAP_TEM_UP_CO,	IDB_BITMAP_TEM_UP_CO,	IDC_BUTTON_TEM_UP_CO,	"");
+	CreateBitmapButton(&m_TemDn_Co,	1422,	ROW3,	IDB_BITMAP_TEM_DN_CO,	IDB_BITMAP_TEM_DN_CO_1,	IDC_BUTTON_TEM_DN_CO,	"");
+	CreateBitmapButton(&m_TemUp_Co,	1712,	ROW3,	IDB_BITMAP_TEM_UP_CO,	IDB_BITMAP_TEM_UP_CO_1,	IDC_BUTTON_TEM_UP_CO,	"");
 
 	m_HeatSeat_Co.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1422, ROW4, 1422, ROW4), this, IDC_BUTTON_HEATSEAT_CO);
 	m_HeatSeat_Co.LoadBitmaps(IDB_BITMAP_HEATSEAT_CO, IDB_BITMAP_HEATSEAT1_CO);

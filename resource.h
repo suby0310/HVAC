@@ -152,6 +152,26 @@
 #define IDB_BITMAP_VEN_ON6              372
 #define IDB_BITMAP_VEN_ON7              373
 #define IDB_BITMAP_VEN_OFF              374
+#define IDB_BITMAP_MODE_1               375
+#define IDB_BITMAP_MUTE_1               376
+#define IDB_BITMAP_NEXT_1               377
+#define IDB_BITMAP_P1_1                 378
+#define IDB_BITMAP_P2_1                 379
+#define IDB_BITMAP_P3_1                 380
+#define IDB_BITMAP_P4_1                 381
+#define IDB_BITMAP_P5_1                 382
+#define IDB_BITMAP9                     383
+#define IDB_BITMAP_P6_1                 383
+#define IDB_BITMAP_PLAY_1               384
+#define IDB_BITMAP_PRE_1                385
+#define IDB_BITMAP_TEM_DN_1             386
+#define IDB_BITMAP_TEM_DN_CO_1          387
+#define IDB_BITMAP_TEM_UP_1             388
+#define IDB_BITMAP_TEM_UP_CO_1          389
+#define IDB_BITMAP_VEN_DN_1             390
+#define IDB_BITMAP_VEN_UP_1             391
+#define IDB_BITMAP_VOL_DN_1             392
+#define IDB_BITMAP_VOL_UP_1             393
 #define IDC_BUTTON_MODE                 1000
 #define IDC_BUTTON_PRESET1              1001
 #define IDC_BUTTON_PRESET2              1002
@@ -211,7 +231,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        375
+#define _APS_NEXT_RESOURCE_VALUE        394
 #define _APS_NEXT_COMMAND_VALUE         32789
 #define _APS_NEXT_CONTROL_VALUE         1079
 #define _APS_NEXT_SYMED_VALUE           101
