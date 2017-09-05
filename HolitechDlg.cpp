@@ -1269,7 +1269,7 @@ void CHolitechDlg::MediaPlay_HVAC()
 		// ...
 		g_playbutt_hvac=FPAUSE;
 
-		mciOpen_hvac.lpstrElementName;
+		mciOpen_hvac.lpstrElementName = "Ventilating.mp3";
 
 //		if(m_cname.Right(3)=="wav")
 //			mciOpen.lpstrDeviceType = "waveaudio";
@@ -2101,29 +2101,28 @@ void CHolitechDlg::OnTimer(UINT nIDEvent)
 
 	// Ventilating
 
-	mciOpen_hvac.lpstrElementName = "Ventilating.mp3";
-
-	g_playtime_hvac++;
-	if((g_playtime_hvac>=(g_tend_hvac-15))&&(VenFlag==TRUE))
+	//if((VenFlag==TRUE)&&((m_Ven==0)&&(m_HVACauto==FALSE)&&(m_HVACmaxac==FALSE)))
+	if((m_Ven==0)&&(m_HVACauto==FALSE)&&(m_HVACmaxac==FALSE))
 	{
-		g_playbutt_hvac = FPLAY;														//현재 노래 재생이 끝났으므로
-		MediaPlay_HVAC();
+		if(VenFlag==TRUE)
+		{
+			VenFlag = FALSE;
+
+			g_playbutt_hvac = FPAUSE;
+			MediaPlay_HVAC();
+		}
 	}
 
-	if((VenFlag==TRUE)&&((m_Ven==0)&&(m_HVACauto==FALSE)&&(m_HVACmaxac==FALSE)))
+	//if((VenFlag==FALSE)&&((m_Ven>0)||(m_HVACauto==TRUE)||(m_HVACmaxac==TRUE)))
+	if((m_Ven>0)||(m_HVACauto==TRUE)||(m_HVACmaxac==TRUE))
 	{
-		VenFlag = FALSE;
+		if(VenFlag==FALSE)
+		{
+			VenFlag = TRUE;
 
-		g_playbutt_hvac = FPAUSE;
-		MediaPlay_HVAC();
-	}
-
-	if((VenFlag == FALSE)&&((m_Ven>0)||(m_HVACauto==TRUE)||(m_HVACmaxac==TRUE)))
-	{
-		VenFlag = TRUE;
-
-		g_playbutt_hvac = FPLAY;
-		MediaPlay_HVAC();
+			g_playbutt_hvac = FPLAY;
+			MediaPlay_HVAC();
+		}
 	}
 
 	if(m_HVACauto)
@@ -2132,6 +2131,13 @@ void CHolitechDlg::OnTimer(UINT nIDEvent)
 		else m_Ven++;
 
 		DrawBackground();
+	}
+
+	g_playtime_hvac++;
+	if((g_playtime_hvac>=(g_tend_hvac-15))&&(VenFlag==TRUE))
+	{
+		g_playbutt_hvac = FPLAY;														//현재 노래 재생이 끝났으므로
+		MediaPlay_HVAC();
 	}
 
 #else
