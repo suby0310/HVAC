@@ -344,8 +344,8 @@ void CHolitechDlg::DrawBackground()
 void CHolitechDlg::DrawPannel(CDC* memDC, CClientDC* dc)
 {
 	int i = 0;
-	int x = 330;
-	int y = 130;
+	int x = 500;
+	int y = 150;
 	int max_x = x+1500;
 	CString text;
 
@@ -402,7 +402,7 @@ void CHolitechDlg::DrawPannel(CDC* memDC, CClientDC* dc)
 void CHolitechDlg::DrawMode(CDC* memDC, CClientDC* dc)
 {
 	int i = 0;
-	int x = 130, y = 35;
+	int x = 100, y = 50;
 	int max_x = x+400;
 	CString text;
 	
@@ -445,7 +445,7 @@ void CHolitechDlg::DrawMode(CDC* memDC, CClientDC* dc)
 void CHolitechDlg::DrawMute(CDC* memDC, CClientDC* dc)
 {
 	int i = 0;
-	int x = 850, y = 35;
+	int x = 850, y = 50;
 	int max_x = x+400;
 	CString text;
 	
@@ -478,7 +478,7 @@ void CHolitechDlg::DrawMute(CDC* memDC, CClientDC* dc)
 void CHolitechDlg::DrawVolume(CDC* memDC, CClientDC* dc)
 {
 	int i = 0;
-	int x = 1450, y = 35;
+	int x = 1550, y = 50;
 	int max_x = x+600;
 	CString text;
 	
@@ -510,7 +510,7 @@ void CHolitechDlg::DrawVolume(CDC* memDC, CClientDC* dc)
 void CHolitechDlg::DrawTemperature(CDC* memDC, CClientDC* dc)
 {
 	int i = 0;
-	int x = 245, y = 660;
+	int x = 255, y = 655;
 	int max_x = x+200;
 	CString text;
 	
@@ -542,7 +542,7 @@ void CHolitechDlg::DrawTemperature(CDC* memDC, CClientDC* dc)
 void CHolitechDlg::DrawTemperatureCo(CDC* memDC, CClientDC* dc)
 {
 	int i = 0;
-	int x = 1580, y = 660;
+	int x = 1590, y = 655;
 	int max_x = x+200;
 	CString text;
 	
