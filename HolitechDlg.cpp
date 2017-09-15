@@ -88,7 +88,8 @@ CHolitechDlg::CHolitechDlg(CWnd* pParent /*=NULL*/)
 	m_AVNmode = CD;
 	m_AVNmute = false;
 
-	m_Tem = m_TemCo = 26;
+	m_Tem = 23;
+	m_TemCo = 26;
 	m_Ven = 0;
 	m_HSDrv = 0;
 	m_CSDrv = 0;
@@ -1325,6 +1326,8 @@ void CHolitechDlg::MediaClose_HVAC()
 
 void CHolitechDlg::OnMode()
 {
+	if(m_AVNmute) OnMute();
+
 	MediaClose();
 
 	m_AVNmode = m_AVNmode+1;
@@ -1337,6 +1340,8 @@ void CHolitechDlg::OnMode()
 
 void CHolitechDlg::OnPreset1()
 {
+	if(m_AVNmute) OnMute();
+
 	MediaClose();
 
 	m_TrackNo = 1;
@@ -1363,6 +1368,8 @@ void CHolitechDlg::OnPreset1()
 
 void CHolitechDlg::OnPreset2()
 {
+	if(m_AVNmute) OnMute();
+
 	MediaClose();
 
 	m_TrackNo = 2;
@@ -1389,6 +1396,8 @@ void CHolitechDlg::OnPreset2()
 
 void CHolitechDlg::OnPreset3()
 {
+	if(m_AVNmute) OnMute();
+
 	MediaClose();
 
 	m_TrackNo = 3;
@@ -1416,6 +1425,8 @@ void CHolitechDlg::OnPreset3()
 
 void CHolitechDlg::OnPreset4()
 {
+	if(m_AVNmute) OnMute();
+
 	MediaClose();
 
 	m_TrackNo = 4;
@@ -1442,6 +1453,8 @@ void CHolitechDlg::OnPreset4()
 
 void CHolitechDlg::OnPreset5()
 {
+	if(m_AVNmute) OnMute();
+
 	MediaClose();
 
 	m_TrackNo = 5;
@@ -1468,6 +1481,8 @@ void CHolitechDlg::OnPreset5()
 
 void CHolitechDlg::OnPreset6()
 {
+	if(m_AVNmute) OnMute();
+
 	MediaClose();
 
 	m_TrackNo = 6;
