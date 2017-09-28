@@ -193,7 +193,6 @@ protected:
 
 	//Bitmaps for the Window and Letters
 	CBitmap	m_bmpBackgroundImage;
-	CBitmap m_bmpMHz;
 	CBitmap m_bmpDotLarge;
 	CBitmap m_bmpSpaceLarge;
 	CBitmap	m_bmp0Large;
@@ -233,10 +232,6 @@ protected:
 	CBitmap m_bmpYLarge;
 	CBitmap m_bmpZLarge;
 	CBitmap m_bmpDotSmall;
-	CBitmap m_bmpDashSmall;
-	CBitmap m_bmpApostropheSmall;
-	CBitmap m_bmpExclamationSmall;
-	CBitmap m_bmpAmpersandSmall;
 	CBitmap m_bmpCommaSmall;
 	CBitmap m_bmpSpaceSmall;
 	CBitmap	m_bmp0Small;

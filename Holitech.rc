@@ -107,6 +107,7 @@ IDB_BITMAP_VEN_DN_1     BITMAP                  "res\\ven-_1.bmp"
 IDB_BITMAP_VEN_UP_1     BITMAP                  "res\\ven+_1.bmp"
 IDB_BITMAP_VOL_DN_1     BITMAP                  "res\\vol-_1.bmp"
 IDB_BITMAP_VOL_UP_1     BITMAP                  "res\\vol+_1.bmp"
+IDB_BITMAP_LOGO         BITMAP                  "res\\Logo.bmp"
 #endif    // Korean (Korea) resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -135,7 +136,6 @@ IDB_BITMAP_6_LARGE      BITMAP                  "res\\6.bmp"
 IDB_BITMAP_7_LARGE      BITMAP                  "res\\7.bmp"
 IDB_BITMAP_8_LARGE      BITMAP                  "res\\8.bmp"
 IDB_BITMAP_9_LARGE      BITMAP                  "res\\9.bmp"
-IDB_BITMAP_MHZ          BITMAP                  "res\\mhz.bmp"
 IDB_BITMAP_Z_LARGE      BITMAP                  "res\\z.bmp"
 IDB_BITMAP_B_LARGE      BITMAP                  "res\\b.bmp"
 IDB_BITMAP_C_LARGE      BITMAP                  "res\\c.bmp"
@@ -199,12 +199,8 @@ IDB_BITMAP_W_SMALL      BITMAP                  "res\\w_small.bmp"
 IDB_BITMAP_X_SMALL      BITMAP                  "res\\x_small.bmp"
 IDB_BITMAP_0_SMALL      BITMAP                  "res\\0_small.bmp"
 IDB_BITMAP_DOT_SMALL    BITMAP                  "res\\dot_small.bmp"
-IDB_BITMAP_DASH_SMALL   BITMAP                  "res\\dash_small.bmp"
-IDB_BITMAP_APOSTROPHE_SMALL BITMAP                  "res\\apostrophe_small.bmp"
 IDB_BITMAP_SPACE_SMALL  BITMAP                  "res\\space_small.bmp"
 IDB_BITMAP_SPACE_LARGE  BITMAP                  "res\\space.bmp"
-IDB_BITMAP_EXCLAMATION_SMALL BITMAP                  "res\\exclamation_small.bmp"
-IDB_BITMAP_AMPERSAND_SMALL BITMAP                  "res\\ampersand_small.bmp"
 IDB_BITMAP_COMMA_SMALL  BITMAP                  "res\\comma_small.bmp"
 
 #ifdef APSTUDIO_INVOKED
@@ -251,7 +247,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "E:\\MyDrive\\0. Work\\AVN GUI\\Source\\res\\holitech_icon.ico"
+IDR_MAINFRAME           ICON                    "res\\holitech_icon.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //

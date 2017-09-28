@@ -17,7 +17,6 @@
 #define IDB_BITMAP_7_LARGE              189
 #define IDB_BITMAP_8_LARGE              190
 #define IDB_BITMAP_9_LARGE              191
-#define IDB_BITMAP_MHZ                  192
 #define IDB_BITMAP_Z_LARGE              212
 #define IDB_BITMAP_B_LARGE              213
 #define IDB_BITMAP_C_LARGE              214
@@ -81,12 +80,8 @@
 #define IDB_BITMAP_X_SMALL              272
 #define IDB_BITMAP_0_SMALL              273
 #define IDB_BITMAP_DOT_SMALL            288
-#define IDB_BITMAP_DASH_SMALL           289
-#define IDB_BITMAP_APOSTROPHE_SMALL     290
 #define IDB_BITMAP_SPACE_SMALL          291
 #define IDB_BITMAP_SPACE_LARGE          292
-#define IDB_BITMAP_EXCLAMATION_SMALL    293
-#define IDB_BITMAP_AMPERSAND_SMALL      294
 #define IDB_BITMAP_COMMA_SMALL          295
 #define IDB_BITMAP_MODE                 300
 #define IDB_BITMAP_P1                   301
@@ -172,6 +167,8 @@
 #define IDB_BITMAP_VEN_UP_1             391
 #define IDB_BITMAP_VOL_DN_1             392
 #define IDB_BITMAP_VOL_UP_1             393
+#define IDB_BITMAP1                     394
+#define IDB_BITMAP_LOGO                 394
 #define IDC_BUTTON_MODE                 1000
 #define IDC_BUTTON_PRESET1              1001
 #define IDC_BUTTON_PRESET2              1002
@@ -231,7 +228,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        394
+#define _APS_NEXT_RESOURCE_VALUE        395
 #define _APS_NEXT_COMMAND_VALUE         32789
 #define _APS_NEXT_CONTROL_VALUE         1079
 #define _APS_NEXT_SYMED_VALUE           101
