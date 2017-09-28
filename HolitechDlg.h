@@ -279,6 +279,7 @@ protected:
 	CBitmap m_bmpVenOn5;
 	CBitmap m_bmpVenOn6;
 	CBitmap m_bmpVenOn7;
+	CBitmap m_bmpLogo;
 
 	//Drawing functions
 	void DrawBackground();

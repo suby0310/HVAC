@@ -229,7 +229,6 @@ BOOL CHolitechDlg::OnInitDialog()
 	MediaClose_HVAC();
 
 	SetVolume(0.2);		//SetVolume(m_AVNvolume);
-	
 
 	mciParams.dwItem = MCI_DGV_SETAUDIO_VOLUME;
 	mciParams.dwValue = 500;
@@ -318,6 +317,7 @@ void CHolitechDlg::DrawBackground()
 
 	//Draw the background image
 	DrawBitmapOnDC(&memDC, &dc, &m_bmpBackgroundImage, 0, 0);
+	DrawBitmapOnDC(&memDC, &dc, &m_bmpLogo, 850, 50);
 
 	DrawPannel(&memDC, &dc);
 	DrawMode(&memDC, &dc);
@@ -446,7 +446,7 @@ void CHolitechDlg::DrawMode(CDC* memDC, CClientDC* dc)
 void CHolitechDlg::DrawMute(CDC* memDC, CClientDC* dc)
 {
 	int i = 0;
-	int x = 850, y = 50;
+	int x = 1590, y = 240;
 	int max_x = x+400;
 	CString text;
 	
@@ -829,23 +829,142 @@ void CHolitechDlg::DisplayButtons()
 #define ROW3 603
 #define ROW4 747
 #define ROW5 894
+#if 1
+	m_Mode.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(147, ROW1, 147, ROW1), this, IDC_BUTTON_MODE);
+	m_Mode.LoadBitmaps(IDB_BITMAP_MODE, IDB_BITMAP_MODE_1);
+	m_Mode.SizeToContent();
 
-	CreateBitmapButton(&m_Mode,			147,	ROW1,	IDB_BITMAP_MODE,		IDB_BITMAP_MODE_1,		IDC_BUTTON_MODE,		"");
-	CreateBitmapButton(&m_Preset1,		391,	ROW1,	IDB_BITMAP_P1,			IDB_BITMAP_P1_1,		IDC_BUTTON_PRESET1,		"");
-	CreateBitmapButton(&m_Preset2,		623,	ROW1,	IDB_BITMAP_P2,			IDB_BITMAP_P2_1,		IDC_BUTTON_PRESET2,		"");
-	CreateBitmapButton(&m_Preset3,		851,	ROW1,	IDB_BITMAP_P3,			IDB_BITMAP_P3_1,		IDC_BUTTON_PRESET3,		"");
-	CreateBitmapButton(&m_Preset4,		1078,	ROW1,	IDB_BITMAP_P4,			IDB_BITMAP_P4_1,		IDC_BUTTON_PRESET4,		"");
-	CreateBitmapButton(&m_Preset5,		1305,	ROW1,	IDB_BITMAP_P5,			IDB_BITMAP_P5_1,		IDC_BUTTON_PRESET5,		"");
-	CreateBitmapButton(&m_Preset6,		1533,	ROW1,	IDB_BITMAP_P6,			IDB_BITMAP_P6_1,		IDC_BUTTON_PRESET6,		"");
-	CreateBitmapButton(&m_Pre,			391,	ROW2,	IDB_BITMAP_PRE,			IDB_BITMAP_PRE_1,		IDC_BUTTON_PRE,			"");
-	CreateBitmapButton(&m_Play,			623,	ROW2,	IDB_BITMAP_PLAY,		IDB_BITMAP_PLAY_1,		IDC_BUTTON_PLAY,		"");
-	CreateBitmapButton(&m_Next,			851,	ROW2,	IDB_BITMAP_NEXT,		IDB_BITMAP_NEXT_1,		IDC_BUTTON_NEXT,		"");
-	CreateBitmapButton(&m_Mute,			1078,	ROW2,	IDB_BITMAP_MUTE,		IDB_BITMAP_MUTE_1,		IDC_BUTTON_MUTE,		"");
+	m_Preset1.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(391, ROW1, 391, ROW1), this, IDC_BUTTON_PRESET1);
+	m_Preset1.LoadBitmaps(IDB_BITMAP_P1, IDB_BITMAP_P1);
+	m_Preset1.SizeToContent();
+
+	m_Preset2.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(623, ROW1, 623, ROW1), this, IDC_BUTTON_PRESET2);
+	m_Preset2.LoadBitmaps(IDB_BITMAP_P2, IDB_BITMAP_P2_1);
+	m_Preset2.SizeToContent();
+
+	m_Preset3.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(851, ROW1, 851, ROW1), this, IDC_BUTTON_PRESET3);
+	m_Preset3.LoadBitmaps(IDB_BITMAP_P3, IDB_BITMAP_P3_1);
+	m_Preset3.SizeToContent();
+
+	m_Preset4.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1078, ROW1, 1078, ROW1), this, IDC_BUTTON_PRESET4);
+	m_Preset4.LoadBitmaps(IDB_BITMAP_P4, IDB_BITMAP_P4_1);
+	m_Preset4.SizeToContent();
+
+	m_Preset5.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1305, ROW1, 1305, ROW1), this, IDC_BUTTON_PRESET5);
+	m_Preset5.LoadBitmaps(IDB_BITMAP_P5, IDB_BITMAP_P5_1);
+	m_Preset5.SizeToContent();
+
+	m_Preset6.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1533, ROW1, 1533, ROW1), this, IDC_BUTTON_PRESET6);
+	m_Preset6.LoadBitmaps(IDB_BITMAP_P6, IDB_BITMAP_P6_1);
+	m_Preset6.SizeToContent();
+
+	m_Pre.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(391, ROW2, 391, ROW2), this, IDC_BUTTON_PRE);
+	m_Pre.LoadBitmaps(IDB_BITMAP_PRE, IDB_BITMAP_PRE_1);
+	m_Pre.SizeToContent();
+
+	m_Play.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(623, ROW2, 623, ROW2), this, IDC_BUTTON_PLAY);
+	m_Play.LoadBitmaps(IDB_BITMAP_PLAY, IDB_BITMAP_PLAY_1);
+	m_Play.SizeToContent();
+
+	m_Next.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(851, ROW2, 851, ROW2), this, IDC_BUTTON_NEXT);
+	m_Next.LoadBitmaps(IDB_BITMAP_NEXT, IDB_BITMAP_NEXT_1);
+	m_Next.SizeToContent();
+
+	m_Mute.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1078, ROW2, 1078, ROW2), this, IDC_BUTTON_MUTE);
+	m_Mute.LoadBitmaps(IDB_BITMAP_MUTE, IDB_BITMAP_MUTE_1);
+	m_Mute.SizeToContent();
+
+	m_VolDn.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1305, ROW2, 1305, ROW2), this, IDC_BUTTON_VOL_DN);
+	m_VolDn.LoadBitmaps(IDB_BITMAP_VOL_DN, IDB_BITMAP_VOL_DN_1);
+	m_VolDn.SizeToContent();
+
+	m_VolUp.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1533, ROW2, 1533, ROW2), this, IDC_BUTTON_VOL_UP);
+	m_VolUp.LoadBitmaps(IDB_BITMAP_VOL_UP, IDB_BITMAP_VOL_UP_1);
+	m_VolUp.SizeToContent();
+
+	m_TemDn.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(37, ROW3+2, 37, ROW3+2), this, IDC_BUTTON_TEM_DN);
+	m_TemDn.LoadBitmaps(IDB_BITMAP_TEM_DN, IDB_BITMAP_TEM_DN_1);
+	m_TemDn.SizeToContent();
+
+	m_TemUp.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(354, ROW3+2, 354, ROW3+2), this, IDC_BUTTON_TEM_UP);
+	m_TemUp.LoadBitmaps(IDB_BITMAP_TEM_UP, IDB_BITMAP_TEM_UP_1);
+	m_TemUp.SizeToContent();
+
+	m_HeatSeat.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(36, ROW4, 36, ROW4), this, IDC_BUTTON_HEATSEAT);
+	m_HeatSeat.LoadBitmaps(IDB_BITMAP_HEATSEAT, IDB_BITMAP_HEATSEAT1);
+	m_HeatSeat.SizeToContent();
+
+	m_CoolSeat.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(257, ROW4, 257, ROW4), this, IDC_BUTTON_COOLSEAT);
+	m_CoolSeat.LoadBitmaps(IDB_BITMAP_COOLSEAT, IDB_BITMAP_COOLSEAT1);
+	m_CoolSeat.SizeToContent();
+
+	m_BodyFoot.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(504, ROW3, 504, ROW3), this, IDC_BUTTON_BODYFOOT);
+	m_BodyFoot.LoadBitmaps(IDB_BITMAP_BODYFOOT, IDB_BITMAP_BODYFOOT1);
+	m_BodyFoot.SizeToContent();
+
+	m_Head.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(724, ROW3, 724, ROW3), this, IDC_BUTTON_HEAD);
+	m_Head.LoadBitmaps(IDB_BITMAP_HEAD, IDB_BITMAP_HEAD1);
+	m_Head.SizeToContent();
+
+	m_Foot.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(504, ROW4, 504, ROW4), this, IDC_BUTTON_FOOT);
+	m_Foot.LoadBitmaps(IDB_BITMAP_FOOT, IDB_BITMAP_FOOT1);
+	m_Foot.SizeToContent();
+
+	m_HeadFoot.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(724, ROW4, 724, ROW4), this, IDC_BUTTON_HEADFOOT);
+	m_HeadFoot.LoadBitmaps(IDB_BITMAP_HEADFOOT, IDB_BITMAP_HEADFOOT1);
+	m_HeadFoot.SizeToContent();
+
+	m_VenDn.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(973, ROW4, 973, ROW4), this, IDC_BUTTON_VEN_DN);
+	m_VenDn.LoadBitmaps(IDB_BITMAP_VEN_DN, IDB_BITMAP_VEN_DN_1);
+	m_VenDn.SizeToContent();
+
+	m_VenUp.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1197, ROW4, 1197, ROW4), this, IDC_BUTTON_VEN_UP);
+	m_VenUp.LoadBitmaps(IDB_BITMAP_VEN_UP, IDB_BITMAP_VEN_UP_1);
+	m_VenUp.SizeToContent();
+
+	m_TemDn_Co.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1444, ROW3+2, 1444, ROW3+2), this, IDC_BUTTON_TEM_DN_CO);
+	m_TemDn_Co.LoadBitmaps(IDB_BITMAP_TEM_DN_CO, IDB_BITMAP_TEM_DN_CO_1);
+	m_TemDn_Co.SizeToContent();
+
+	m_TemUp_Co.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1763, ROW3+2, 1763, ROW3+2), this, IDC_BUTTON_TEM_UP_CO);
+	m_TemUp_Co.LoadBitmaps(IDB_BITMAP_TEM_UP_CO, IDB_BITMAP_TEM_UP_CO_1);
+	m_TemUp_Co.SizeToContent();
+#else
+	CreateBitmapButton(&m_Mode, 		147,	ROW1,	IDB_BITMAP_MODE,		IDB_BITMAP_MODE_1,		IDC_BUTTON_MODE,		"");
+
+	m_Preset1.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(391, ROW1, 391, ROW1), this, IDC_BUTTON_PRESET1);
+	m_Preset1.LoadBitmaps(IDB_BITMAP_P1, IDB_BITMAP_P1);
+	m_Preset1.SizeToContent();
+
+	m_Preset2.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(623, ROW1, 623, ROW1), this, IDC_BUTTON_PRESET2);
+	m_Preset2.LoadBitmaps(IDB_BITMAP_P2, IDB_BITMAP_P2_1);
+	m_Preset2.SizeToContent();
+
+	m_Preset3.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(851, ROW1, 851, ROW1), this, IDC_BUTTON_PRESET3);
+	m_Preset3.LoadBitmaps(IDB_BITMAP_P3, IDB_BITMAP_P3_1);
+	m_Preset3.SizeToContent();
+
+	m_Preset4.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1078, ROW1, 1078, ROW1), this, IDC_BUTTON_PRESET4);
+	m_Preset4.LoadBitmaps(IDB_BITMAP_P4, IDB_BITMAP_P4_1);
+	m_Preset4.SizeToContent();
+
+	m_Preset5.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1305, ROW1, 1305, ROW1), this, IDC_BUTTON_PRESET5);
+	m_Preset5.LoadBitmaps(IDB_BITMAP_P5, IDB_BITMAP_P5_1);
+	m_Preset5.SizeToContent();
+
+	m_Preset6.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1533, ROW1, 1533, ROW1), this, IDC_BUTTON_PRESET6);
+	m_Preset6.LoadBitmaps(IDB_BITMAP_P6, IDB_BITMAP_P6_1);
+	m_Preset6.SizeToContent();
+
+	CreateBitmapButton(&m_Pre,			391,	ROW2,	IDB_BITMAP_PRE, 		IDB_BITMAP_PRE_1,		IDC_BUTTON_PRE, 		"");
+	CreateBitmapButton(&m_Play, 		623,	ROW2,	IDB_BITMAP_PLAY,		IDB_BITMAP_PLAY_1,		IDC_BUTTON_PLAY,		"");
+	CreateBitmapButton(&m_Next, 		851,	ROW2,	IDB_BITMAP_NEXT,		IDB_BITMAP_NEXT_1,		IDC_BUTTON_NEXT,		"");
+	CreateBitmapButton(&m_Mute, 		1078,	ROW2,	IDB_BITMAP_MUTE,		IDB_BITMAP_MUTE_1,		IDC_BUTTON_MUTE,		"");
 	CreateBitmapButton(&m_VolDn,		1305,	ROW2,	IDB_BITMAP_VOL_DN,		IDB_BITMAP_VOL_DN_1,	IDC_BUTTON_VOL_DN,		"");
 	CreateBitmapButton(&m_VolUp,		1533,	ROW2,	IDB_BITMAP_VOL_UP,		IDB_BITMAP_VOL_UP_1,	IDC_BUTTON_VOL_UP,		"");
 
-	CreateBitmapButton(&m_TemDn,		37,		ROW3+2,	IDB_BITMAP_TEM_DN,		IDB_BITMAP_TEM_DN_1,	IDC_BUTTON_TEM_DN,		"");
-	CreateBitmapButton(&m_TemUp,		354,	ROW3+2,	IDB_BITMAP_TEM_UP,		IDB_BITMAP_TEM_UP_1,	IDC_BUTTON_TEM_UP,		"");
+	CreateBitmapButton(&m_TemDn,		37, 	ROW3+2, IDB_BITMAP_TEM_DN,		IDB_BITMAP_TEM_DN_1,	IDC_BUTTON_TEM_DN,		"");
+	CreateBitmapButton(&m_TemUp,		354,	ROW3+2, IDB_BITMAP_TEM_UP,		IDB_BITMAP_TEM_UP_1,	IDC_BUTTON_TEM_UP,		"");
 
 	m_HeatSeat.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(36, ROW4, 36, ROW4), this, IDC_BUTTON_HEATSEAT);
 	m_HeatSeat.LoadBitmaps(IDB_BITMAP_HEATSEAT, IDB_BITMAP_HEATSEAT1);
@@ -874,9 +993,9 @@ void CHolitechDlg::DisplayButtons()
 	CreateBitmapButton(&m_VenDn,	973,	ROW4,	IDB_BITMAP_VEN_DN,		IDB_BITMAP_VEN_DN_1,	IDC_BUTTON_VEN_DN,		"");
 	CreateBitmapButton(&m_VenUp,	1197,	ROW4,	IDB_BITMAP_VEN_UP,		IDB_BITMAP_VEN_UP_1,	IDC_BUTTON_VEN_UP,		"");
 
-	CreateBitmapButton(&m_TemDn_Co,	1444,	ROW3+2,	IDB_BITMAP_TEM_DN_CO,	IDB_BITMAP_TEM_DN_CO_1,	IDC_BUTTON_TEM_DN_CO,	"");
-	CreateBitmapButton(&m_TemUp_Co,	1763,	ROW3+2,	IDB_BITMAP_TEM_UP_CO,	IDB_BITMAP_TEM_UP_CO_1,	IDC_BUTTON_TEM_UP_CO,	"");
-
+	CreateBitmapButton(&m_TemDn_Co, 1444,	ROW3+2, IDB_BITMAP_TEM_DN_CO,	IDB_BITMAP_TEM_DN_CO_1, IDC_BUTTON_TEM_DN_CO,	"");
+	CreateBitmapButton(&m_TemUp_Co, 1763,	ROW3+2, IDB_BITMAP_TEM_UP_CO,	IDB_BITMAP_TEM_UP_CO_1, IDC_BUTTON_TEM_UP_CO,	"");
+#endif
 	m_HeatSeat_Co.Create(NULL, WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_NOTIFY, CRect(1442, ROW4, 1442, ROW4), this, IDC_BUTTON_HEATSEAT_CO);
 	m_HeatSeat_Co.LoadBitmaps(IDB_BITMAP_HEATSEAT_CO, IDB_BITMAP_HEATSEAT1_CO);
 	m_HeatSeat_Co.SizeToContent();
@@ -1022,6 +1141,7 @@ void CHolitechDlg::LoadBitmaps()
 	LoadBitmapAndCoordinates(&m_bmpVenOn5, IDB_BITMAP_VEN_ON5);
 	LoadBitmapAndCoordinates(&m_bmpVenOn6, IDB_BITMAP_VEN_ON6);
 	LoadBitmapAndCoordinates(&m_bmpVenOn7, IDB_BITMAP_VEN_ON7);
+	LoadBitmapAndCoordinates(&m_bmpLogo, IDB_BITMAP_LOGO);
 }
 
 void CHolitechDlg::LoadBitmapAndCoordinates(CBitmap* bmp, UINT resourceID)
@@ -1317,6 +1437,42 @@ void CHolitechDlg::MediaClose_HVAC()
 
 void CHolitechDlg::OnMode()
 {
+	switch(m_TrackNo)
+	{
+		case 1:
+			m_Preset1.LoadBitmaps(IDB_BITMAP_P1, IDB_BITMAP_P1_1);
+			m_Preset1.SizeToContent();
+			m_Preset1.Invalidate();
+			break;
+		case 2:
+			m_Preset2.LoadBitmaps(IDB_BITMAP_P2, IDB_BITMAP_P2_1);
+			m_Preset2.SizeToContent();
+			m_Preset2.Invalidate();
+			break;
+		case 3:
+			m_Preset3.LoadBitmaps(IDB_BITMAP_P3, IDB_BITMAP_P3_1);
+			m_Preset3.SizeToContent();
+			m_Preset3.Invalidate();
+			break;
+		case 4:
+			m_Preset4.LoadBitmaps(IDB_BITMAP_P4, IDB_BITMAP_P4_1);
+			m_Preset4.SizeToContent();
+			m_Preset4.Invalidate();
+			break;
+		case 5:
+			m_Preset5.LoadBitmaps(IDB_BITMAP_P5, IDB_BITMAP_P5_1);
+			m_Preset5.SizeToContent();
+			m_Preset5.Invalidate();
+			break;
+		case 6:
+			m_Preset6.LoadBitmaps(IDB_BITMAP_P6, IDB_BITMAP_P6_1);
+			m_Preset6.SizeToContent();
+			m_Preset6.Invalidate();
+			break;
+		default:
+			break;
+	}
+
 	if(m_AVNmute) OnMute();
 
 	MediaClose();
@@ -1331,6 +1487,46 @@ void CHolitechDlg::OnMode()
 
 void CHolitechDlg::OnPreset1()
 {
+	m_Preset1.LoadBitmaps(IDB_BITMAP_P1_1, IDB_BITMAP_P1);
+	m_Preset1.SizeToContent();
+	m_Preset1.Invalidate();
+
+	switch(m_TrackNo)
+	{
+		case 1:
+//			m_Preset1.LoadBitmaps(IDB_BITMAP_P1, IDB_BITMAP_P1_1);
+//			m_Preset1.SizeToContent();
+//			m_Preset1.Invalidate();
+			break;
+		case 2:
+			m_Preset2.LoadBitmaps(IDB_BITMAP_P2, IDB_BITMAP_P2_1);
+			m_Preset2.SizeToContent();
+			m_Preset2.Invalidate();
+			break;
+		case 3:
+			m_Preset3.LoadBitmaps(IDB_BITMAP_P3, IDB_BITMAP_P3_1);
+			m_Preset3.SizeToContent();
+			m_Preset3.Invalidate();
+			break;
+		case 4:
+			m_Preset4.LoadBitmaps(IDB_BITMAP_P4, IDB_BITMAP_P4_1);
+			m_Preset4.SizeToContent();
+			m_Preset4.Invalidate();
+			break;
+		case 5:
+			m_Preset5.LoadBitmaps(IDB_BITMAP_P5, IDB_BITMAP_P5_1);
+			m_Preset5.SizeToContent();
+			m_Preset5.Invalidate();
+			break;
+		case 6:
+			m_Preset6.LoadBitmaps(IDB_BITMAP_P6, IDB_BITMAP_P6_1);
+			m_Preset6.SizeToContent();
+			m_Preset6.Invalidate();
+			break;
+		default:
+			break;
+	}
+
 	if(m_AVNmute) OnMute();
 
 	MediaClose();
@@ -1359,6 +1555,46 @@ void CHolitechDlg::OnPreset1()
 
 void CHolitechDlg::OnPreset2()
 {
+	m_Preset2.LoadBitmaps(IDB_BITMAP_P2_1, IDB_BITMAP_P2);
+	m_Preset2.SizeToContent();
+	m_Preset2.Invalidate();
+
+	switch(m_TrackNo)
+	{
+		case 1:
+			m_Preset1.LoadBitmaps(IDB_BITMAP_P1, IDB_BITMAP_P1_1);
+			m_Preset1.SizeToContent();
+			m_Preset1.Invalidate();
+			break;
+		case 2:
+//			m_Preset2.LoadBitmaps(IDB_BITMAP_P2, IDB_BITMAP_P2_1);
+//			m_Preset2.SizeToContent();
+//			m_Preset2.Invalidate();
+			break;
+		case 3:
+			m_Preset3.LoadBitmaps(IDB_BITMAP_P3, IDB_BITMAP_P3_1);
+			m_Preset3.SizeToContent();
+			m_Preset3.Invalidate();
+			break;
+		case 4:
+			m_Preset4.LoadBitmaps(IDB_BITMAP_P4, IDB_BITMAP_P4_1);
+			m_Preset4.SizeToContent();
+			m_Preset4.Invalidate();
+			break;
+		case 5:
+			m_Preset5.LoadBitmaps(IDB_BITMAP_P5, IDB_BITMAP_P5_1);
+			m_Preset5.SizeToContent();
+			m_Preset5.Invalidate();
+			break;
+		case 6:
+			m_Preset6.LoadBitmaps(IDB_BITMAP_P6, IDB_BITMAP_P6_1);
+			m_Preset6.SizeToContent();
+			m_Preset6.Invalidate();
+			break;
+		default:
+			break;
+	}
+
 	if(m_AVNmute) OnMute();
 
 	MediaClose();
@@ -1387,6 +1623,46 @@ void CHolitechDlg::OnPreset2()
 
 void CHolitechDlg::OnPreset3()
 {
+	m_Preset3.LoadBitmaps(IDB_BITMAP_P3_1, IDB_BITMAP_P3);
+	m_Preset3.SizeToContent();
+	m_Preset3.Invalidate();
+
+	switch(m_TrackNo)
+	{
+		case 1:
+			m_Preset1.LoadBitmaps(IDB_BITMAP_P1, IDB_BITMAP_P1_1);
+			m_Preset1.SizeToContent();
+			m_Preset1.Invalidate();
+			break;
+		case 2:
+			m_Preset2.LoadBitmaps(IDB_BITMAP_P2, IDB_BITMAP_P2_1);
+			m_Preset2.SizeToContent();
+			m_Preset2.Invalidate();
+			break;
+		case 3:
+//			m_Preset3.LoadBitmaps(IDB_BITMAP_P3, IDB_BITMAP_P3_1);
+//			m_Preset3.SizeToContent();
+//			m_Preset3.Invalidate();
+			break;
+		case 4:
+			m_Preset4.LoadBitmaps(IDB_BITMAP_P4, IDB_BITMAP_P4_1);
+			m_Preset4.SizeToContent();
+			m_Preset4.Invalidate();
+			break;
+		case 5:
+			m_Preset5.LoadBitmaps(IDB_BITMAP_P5, IDB_BITMAP_P5_1);
+			m_Preset5.SizeToContent();
+			m_Preset5.Invalidate();
+			break;
+		case 6:
+			m_Preset6.LoadBitmaps(IDB_BITMAP_P6, IDB_BITMAP_P6_1);
+			m_Preset6.SizeToContent();
+			m_Preset6.Invalidate();
+			break;
+		default:
+			break;
+	}
+
 	if(m_AVNmute) OnMute();
 
 	MediaClose();
@@ -1408,7 +1684,6 @@ void CHolitechDlg::OnPreset3()
 		mciOpen.lpstrElementName = "C3_David Lanz-Return to the heart.mp3";
 	}
 
-
 	MediaPlay();
 
 	UpdatePannel();
@@ -1416,6 +1691,46 @@ void CHolitechDlg::OnPreset3()
 
 void CHolitechDlg::OnPreset4()
 {
+	m_Preset4.LoadBitmaps(IDB_BITMAP_P4_1, IDB_BITMAP_P4);
+	m_Preset4.SizeToContent();
+	m_Preset4.Invalidate();
+
+	switch(m_TrackNo)
+	{
+		case 1:
+			m_Preset1.LoadBitmaps(IDB_BITMAP_P1, IDB_BITMAP_P1_1);
+			m_Preset1.SizeToContent();
+			m_Preset1.Invalidate();
+			break;
+		case 2:
+			m_Preset2.LoadBitmaps(IDB_BITMAP_P2, IDB_BITMAP_P2_1);
+			m_Preset2.SizeToContent();
+			m_Preset2.Invalidate();
+			break;
+		case 3:
+			m_Preset3.LoadBitmaps(IDB_BITMAP_P3, IDB_BITMAP_P3_1);
+			m_Preset3.SizeToContent();
+			m_Preset3.Invalidate();
+			break;
+		case 4:
+//			m_Preset4.LoadBitmaps(IDB_BITMAP_P4, IDB_BITMAP_P4_1);
+//			m_Preset4.SizeToContent();
+//			m_Preset4.Invalidate();
+			break;
+		case 5:
+			m_Preset5.LoadBitmaps(IDB_BITMAP_P5, IDB_BITMAP_P5_1);
+			m_Preset5.SizeToContent();
+			m_Preset5.Invalidate();
+			break;
+		case 6:
+			m_Preset6.LoadBitmaps(IDB_BITMAP_P6, IDB_BITMAP_P6_1);
+			m_Preset6.SizeToContent();
+			m_Preset6.Invalidate();
+			break;
+		default:
+			break;
+	}
+	
 	if(m_AVNmute) OnMute();
 
 	MediaClose();
@@ -1444,6 +1759,46 @@ void CHolitechDlg::OnPreset4()
 
 void CHolitechDlg::OnPreset5()
 {
+	m_Preset5.LoadBitmaps(IDB_BITMAP_P5_1, IDB_BITMAP_P5);
+	m_Preset5.SizeToContent();
+	m_Preset5.Invalidate();
+
+	switch(m_TrackNo)
+	{
+		case 1:
+			m_Preset1.LoadBitmaps(IDB_BITMAP_P1, IDB_BITMAP_P1_1);
+			m_Preset1.SizeToContent();
+			m_Preset1.Invalidate();
+			break;
+		case 2:
+			m_Preset2.LoadBitmaps(IDB_BITMAP_P2, IDB_BITMAP_P2_1);
+			m_Preset2.SizeToContent();
+			m_Preset2.Invalidate();
+			break;
+		case 3:
+			m_Preset3.LoadBitmaps(IDB_BITMAP_P3, IDB_BITMAP_P3_1);
+			m_Preset3.SizeToContent();
+			m_Preset3.Invalidate();
+			break;
+		case 4:
+			m_Preset4.LoadBitmaps(IDB_BITMAP_P4, IDB_BITMAP_P4_1);
+			m_Preset4.SizeToContent();
+			m_Preset4.Invalidate();
+			break;
+		case 5:
+//			m_Preset5.LoadBitmaps(IDB_BITMAP_P5, IDB_BITMAP_P5_1);
+//			m_Preset5.SizeToContent();
+//			m_Preset5.Invalidate();
+			break;
+		case 6:
+			m_Preset6.LoadBitmaps(IDB_BITMAP_P6, IDB_BITMAP_P6_1);
+			m_Preset6.SizeToContent();
+			m_Preset6.Invalidate();
+			break;
+		default:
+			break;
+	}
+
 	if(m_AVNmute) OnMute();
 
 	MediaClose();
@@ -1472,6 +1827,46 @@ void CHolitechDlg::OnPreset5()
 
 void CHolitechDlg::OnPreset6()
 {
+	m_Preset6.LoadBitmaps(IDB_BITMAP_P6_1, IDB_BITMAP_P6);
+	m_Preset6.SizeToContent();
+	m_Preset6.Invalidate();
+
+	switch(m_TrackNo)
+	{
+		case 1:
+			m_Preset1.LoadBitmaps(IDB_BITMAP_P1, IDB_BITMAP_P1_1);
+			m_Preset1.SizeToContent();
+			m_Preset1.Invalidate();
+			break;
+		case 2:
+			m_Preset2.LoadBitmaps(IDB_BITMAP_P2, IDB_BITMAP_P2_1);
+			m_Preset2.SizeToContent();
+			m_Preset2.Invalidate();
+			break;
+		case 3:
+			m_Preset3.LoadBitmaps(IDB_BITMAP_P3, IDB_BITMAP_P3_1);
+			m_Preset3.SizeToContent();
+			m_Preset3.Invalidate();
+			break;
+		case 4:
+			m_Preset4.LoadBitmaps(IDB_BITMAP_P4, IDB_BITMAP_P4_1);
+			m_Preset4.SizeToContent();
+			m_Preset4.Invalidate();
+			break;
+		case 5:
+			m_Preset5.LoadBitmaps(IDB_BITMAP_P5, IDB_BITMAP_P5_1);
+			m_Preset5.SizeToContent();
+			m_Preset5.Invalidate();
+			break;
+		case 6:
+//			m_Preset6.LoadBitmaps(IDB_BITMAP_P6, IDB_BITMAP_P6_1);
+//			m_Preset6.SizeToContent();
+//			m_Preset6.Invalidate();
+			break;
+		default:
+			break;
+	}
+
 	if(m_AVNmute) OnMute();
 
 	MediaClose();
@@ -1501,28 +1896,25 @@ void CHolitechDlg::OnPreset6()
 
 void CHolitechDlg::OnPre()
 {
-	if(m_TrackNo <= 0) m_TrackNo = 6;
-	else m_TrackNo--;
-
 	switch(m_TrackNo)
 	{
 		case 1:
-			OnPreset1();
+			OnPreset6();
 			break;
 		case 2:
-			OnPreset2();
+			OnPreset1();
 			break;
 		case 3:
-			OnPreset3();
+			OnPreset2();
 			break;
 		case 4:
-			OnPreset4();
+			OnPreset3();
 			break;
 		case 5:
-			OnPreset5();
+			OnPreset4();
 			break;
 		case 6:
-			OnPreset6();
+			OnPreset5();
 			break;
 		default:
 			break;
@@ -1595,28 +1987,25 @@ void CHolitechDlg::OnPlay()
 
 void CHolitechDlg::OnNext()
 {
-	if(m_TrackNo >= 6) m_TrackNo = 0;
-	else m_TrackNo++;
-
 	switch(m_TrackNo)
 	{
 		case 1:
-			OnPreset1();
-			break;
-		case 2:
 			OnPreset2();
 			break;
-		case 3:
+		case 2:
 			OnPreset3();
 			break;
-		case 4:
+		case 3:
 			OnPreset4();
 			break;
-		case 5:
+		case 4:
 			OnPreset5();
 			break;
-		case 6:
+		case 5:
 			OnPreset6();
+			break;
+		case 6:
+			OnPreset1();
 			break;
 		default:
 			break;
@@ -1669,12 +2058,16 @@ void CHolitechDlg::OnTemDn()
 {
 	if(m_Tem > 10) m_Tem--;
 
+	if(m_HVACauto) m_TemCo = m_Tem;
+
 	DrawBackground();
 }
 
 void CHolitechDlg::OnTemUp()
 {
 	if(m_Tem < 40) m_Tem++;
+
+	if(m_HVACauto) m_TemCo = m_Tem;
 
 	DrawBackground();
 }
@@ -1891,12 +2284,16 @@ void CHolitechDlg::OnTemDnCo()
 {
 	if(m_TemCo > 10) m_TemCo--;
 
+	if(m_HVACauto) m_Tem = m_TemCo;
+
 	DrawBackground();
 }
 
 void CHolitechDlg::OnTemUpCo()
 {
 	if(m_TemCo < 40) m_TemCo++;
+
+	if(m_HVACauto) m_Tem = m_TemCo;
 
 	DrawBackground();
 }
@@ -2001,6 +2398,9 @@ void CHolitechDlg::OnAuto()
 
 	if(m_HVACauto)
 	{
+		m_TemCo = m_Tem;
+		DrawBackground();
+	
 		m_Auto.LoadBitmaps(IDB_BITMAP_AUTO1, IDB_BITMAP_AUTO);
 
 		if(!m_H) OnHead();
@@ -2101,7 +2501,8 @@ void CHolitechDlg::OnTimer(UINT nIDEvent)
 	if(g_playtime>=g_tend)
 	{
 		//OnNext();
-		//g_playbutt=FPLAY;														//현재 노래 재생이 끝났으므로
+		g_playbutt = FPLAY;														//현재 노래 재생이 끝났으므로
+		MediaPlay();
 	}
 
 
@@ -2142,7 +2543,7 @@ void CHolitechDlg::OnTimer(UINT nIDEvent)
 	g_playtime_hvac++;
 	if((g_playtime_hvac>=(g_tend_hvac-15))&&(VenFlag==TRUE))
 	{
-		g_playbutt_hvac = FPLAY;														//현재 노래 재생이 끝났으므로
+		g_playbutt_hvac = FPLAY;														//현재 재생이 끝났으므로
 		MediaPlay_HVAC();
 	}
 
